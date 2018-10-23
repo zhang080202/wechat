@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "page/arcticle/arcticle",
+    "page/user/user"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "首页",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#0099CC",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "page/arcticle/arcticle",
+        "iconPath": "image/imgs/icon_home_normal@3x.png",
+        "selectedIconPath": "image/imgs/icon_home_highlight@3x.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "page/user/user",
+        "iconPath": "image/imgs/icon_my_normal@3x.png",
+        "selectedIconPath": "image/imgs/icon_my_highlight@3x.png",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "workers": "workers",
+  "debug": false
+}
