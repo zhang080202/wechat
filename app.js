@@ -5,6 +5,7 @@ App({
   },
   globalData: {
     hasLogin: false,
-    openid: null
+    openid: null,
+    url: 'http://192.168.0.10/'
   }
 })
