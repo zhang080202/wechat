@@ -2,7 +2,7 @@
 App({
   onLaunch(opts) {
     console.log('App Launch', opts)
-  },
+  },//dd
   globalData: {
     hasLogin: false,
     openid: null,
