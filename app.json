@@ -35,6 +35,6 @@
     "uploadFile": 10000,
     "downloadFile": 10000
   },
-  "workers": "workers",
+  "workers": "workers",///1
   "debug": false
 }
