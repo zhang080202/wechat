@@ -1,1 +1,18 @@
-/* page/user/user.wxss */
+.page-head-center {
+  text-align: center;
+}
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+.userinfo-nickName {
+  color: #aaa;
+}
+.page-head-image {
+  text-align: center;
+}
+.page-head-text {
+  text-align: center;
+}

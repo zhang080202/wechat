@@ -1,18 +1,44 @@
 // page/user/user.js
+const app = getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    userInfo: null,
+    hasLogin: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.setData({
+      hasLogin: app.globalData.hasLogin
+    });
+    wx.getSetting({
+      success: res => {
+        debugger;
+        console.log(res);
+        res.authSetting['scope.userInfo'] = false;
+        if (!res.authSetting['scope.userInfo']) {
+          wx.authorize({
+            scope: 'scope.userInfo',
+            success: res => {
+              console.log(this)
+              // this.getUserInfo();
+              // wx.getUserInfo({
+              //   success: res => {
+              //     console.log(res);
+              //   }
+              // })
+            }
+          })
+        }
+      }
+    })
   },
 
   /**
@@ -62,5 +88,15 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  getUserInfo: function (e) {
+    console.log(e);
+    app.globalData.userInfo = e.detail.userInfo;
+    app.globalData.hasLogin = true;
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasLogin: true
+    })
   }
 })

@@ -1,2 +1,19 @@
-<!--page/user/user.wxml-->
-<text>个人中心</text>
+<view class='container'>
+  <view class='page-head'>
+    <view class='page-head-center'>
+      <block wx:if="{{hasLogin === true}}">
+        <view class='page-head-image'>
+          <image class='userinfo-avatar' src='{{userInfo.avatarUrl}}' mode='cover'></image>
+        </view>
+        <view class='page-head-text'>
+          <text class='userinfo-nickName'>{{userInfo.nickName}}</text>
+        </view>
+      </block>
+      <block wx:if="{{hasLogin === false}}">
+        <button class='page-head-button' type='primary' size='mini' open-type='getUserInfo' 
+                bindgetuserinfo='getUserInfo'>登录</button>
+      </block>
+    </view>
+  </view>
+  <view class='user-op'></view>
+</view>
