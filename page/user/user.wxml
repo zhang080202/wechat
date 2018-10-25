@@ -10,10 +10,21 @@
         </view>
       </block>
       <block wx:if="{{hasLogin === false}}">
-        <button class='page-head-button' type='primary' size='mini' open-type='getUserInfo' 
-                bindgetuserinfo='getUserInfo'>登录</button>
+        <view class='page-head-image'>
+          <image class='userinfo-avatar' src='../../image/default.jpg' mode='cover'></image>
+        </view>
+        <view class='page-head-view'>
+          <button class='page-head-button' type='primary' size='mini' open-type='getUserInfo' bindgetuserinfo='getUserInfo'>授权登录</button>
+        </view>
       </block>
     </view>
   </view>
-  <view class='user-op'></view>
+  <view class='page-body'>
+    <view class='page-body-item'>
+        <navigator url="" class="navigator">
+          <view class="navigator-text">cccccccs</view>
+          <view class="navigator-arrow"></view>
+        </navigator>
+    </view>
+  </view>
 </view>

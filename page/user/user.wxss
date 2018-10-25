@@ -10,9 +10,22 @@
 .userinfo-nickName {
   color: #aaa;
 }
+.page-head {
+  height: 300rpx;
+  width: 100%;
+  background: -webkit-linear-gradient(top,white,#B0E0E6,rgb(172, 210, 233));
+}
 .page-head-image {
   text-align: center;
 }
 .page-head-text {
   text-align: center;
+}
+.page-body-item {
+  border: 1px solid #aaa;
+  margin-top: 30rpx;
+  height: 70rpx
+}
+.navigator {
+  height: 70rpx;
 }
