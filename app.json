@@ -1,13 +1,15 @@
 {
   "pages": [
     "page/arcticle/arcticle",
-    "page/user/user"
+    "page/user/user",
+    "page/user/modules/userinfo/userinfo"
   ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "首页",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
+    "navigationBarBackgroundColor": "white",
+    "backgroundColor": "white",
+    "enablePullDownRefresh": true
   },
   "tabBar": {
     "color": "#7A7E83",

@@ -8,7 +8,24 @@ Page({
    */
   data: {
     userInfo: null,
-    hasLogin: false
+    hasLogin: false,
+    list: [
+      {
+        id: 'userinfo',
+        name: '个人信息',
+        page: 'userinfo'
+      },
+      {
+        id: '',
+        name: '我的审核',
+        page: ''
+      },
+      {
+        id: '',
+        name: '意见反馈',
+        page: ''
+      }
+    ]
   },
 
   /**
