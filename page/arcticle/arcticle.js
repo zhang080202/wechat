@@ -1,3 +1,4 @@
+const app = getApp();
 // page/arcticle/arcticle.js
 Page({
 
@@ -12,7 +13,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.getUserInfo({
+      success: res => {
+        app.globalData.userInfo = res.userInfo;
+        app.globalData.hasLogin = true;
+      }
+    })
   },
 
   /**

@@ -1,1 +1,20 @@
-<text>{{user.name}}</text>
+<view class='container'>
+  <view class='page-body'>
+    <view class='page-body-name'>
+      <view class='page-body-name-info'>姓名:</view>
+      <view class='page-body-name-view'>
+        <input class='page-body-name-view-input' type='text' focus='true' maxlength='10' placeholder='请输入姓名'></input>
+      </view>
+    </view>
+
+    <view class='page-body-gender page-body-name'>
+      <view class='page-body-gender-info page-body-name-info'>性别:</view>
+      <view class='page-body-name-view'>
+        <radio-group name='radio-gender'>
+          <label><radio value='0'>男</radio></label>
+          <label><radio value='1'>女</radio></label>
+        </radio-group>
+      </view>
+    </view>
+  </view>
+</view>

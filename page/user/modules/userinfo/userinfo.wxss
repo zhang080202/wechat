@@ -1,0 +1,27 @@
+label {
+  display: inline-block;
+  min-width: 180rpx;
+  margin-right: 20rpx;
+}
+.page-body-name {
+  display: flex;
+  background-color: white;
+  margin-top: 10rpx;
+  height: 2.6em;
+  line-height: 2.6em;
+}
+
+.page-body-name-info {
+  width: 100rpx;
+  margin-left: 30rpx;
+}
+
+.page-body-name-view {
+  margin-left: 40rpx;
+}
+
+.page-body-name-view-input {
+  height: 2.6em;
+  min-height: 2.6em;
+  line-height: 2.6em;
+}

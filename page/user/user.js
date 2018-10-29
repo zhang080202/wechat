@@ -49,16 +49,9 @@ Page({
     //   }
     // })
 
-    wx.getUserInfo({
-      success: res => {
-        console.log(res);
-        app.globalData.userInfo = res.userInfo;
-        app.globalData.hasLogin = true;
-        this.setData({
-          userInfo: res.userInfo,
-          hasLogin: true
-        })
-      }
+    this.setData({
+      userInfo: app.globalData.userInfo,
+      hasLogin: app.globalData.hasLogin
     })
   },
 
