@@ -12,7 +12,7 @@ Page({
     list: [
       {
         id: 'userinfo',
-        name: '个人信息',
+        name: '基本信息',
         page: 'userinfo'
       },
       {
