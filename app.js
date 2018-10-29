@@ -7,6 +7,6 @@ App({
     hasLogin: false,
     userInfo: null,
     openid: null,
-    url: 'http://192.168.0.10/'
+    url: 'http://192.168.31.233:8080/article'
   }
 })

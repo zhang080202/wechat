@@ -20,11 +20,13 @@
     </view>
   </view>
   <view class='page-body'>
-    <view class='page-body-item'>
-        <navigator url="" class="navigator">
-          <view class="navigator-text">cccccccs</view>
+    <block wx:for='{{list}}'>
+      <view class='page-body-item'>
+        <navigator url="modules/{{item.page}}/{{item.page}}" class="navigator">
+          <view class="navigator-text">{{item.name}}</view>
           <view class="navigator-arrow"></view>
         </navigator>
     </view>
+    </block>
   </view>
 </view>

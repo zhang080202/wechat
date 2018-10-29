@@ -21,11 +21,36 @@
 .page-head-text {
   text-align: center;
 }
-.page-body-item {
-  border: 1px solid #aaa;
+.page-body {
   margin-top: 30rpx;
-  height: 70rpx
+}
+.page-body-item {
+  margin-top: 3rpx;
+  height: 80rpx;
+  background-color: white;
+  line-height: 80rpx;
 }
 .navigator {
-  height: 70rpx;
+  height: 80rpx;
+}
+.navigator-text {
+  margin-left: 20rpx;
+}
+.navigator-arrow {
+  padding-right: 26rpx;
+  position: relative;
+}
+.navigator-arrow:after {
+  content: " ";
+  display: inline-block;
+  height: 18rpx;
+  width: 18rpx;
+  border-width: 2rpx 2rpx 0 0;
+  border-color: #888888;
+  border-style: solid;
+  transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  position: absolute;
+  top: 50%;
+  margin-top: -44rpx;
+  right: 28rpx;
 }
