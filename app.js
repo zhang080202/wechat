@@ -7,7 +7,7 @@ App({
     wx.getUserInfo({
       success: res => {
         console.log(res);
-        res.userInfo = that.globalData.userInfo;
+        that.globalData.userInfo = res.userInfo;
       }
     })
     //登陆
@@ -15,7 +15,7 @@ App({
       success: res => {
         if (res.code) {
           wx.request({
-            url: that.globalData.url + '/user/v1/queryUserByCode',
+            url: that.globalData.url + '/user/v1/userLogin',
             method: 'GET',
             data: {
               code: res.code,
@@ -35,6 +35,7 @@ App({
     userInfo: null,
     user: {},
     openid: null,
-    url: 'http://192.168.31.233:8080/article'
+    // url: 'http://192.168.31.233:8080/article'
+    url: 'http://192.168.92.131:8080/article'
   }
 })

@@ -1,20 +1,45 @@
 <view class='container'>
   <view class='page-body'>
-    <view class='page-body-name'>
-      <view class='page-body-name-info'>姓名:</view>
-      <view class='page-body-name-view'>
-        <input class='page-body-name-view-input' type='text' focus='true' maxlength='10' placeholder='请输入姓名'></input>
+    <form bindsubmit='formSubmit'>
+      <view class='page-body-name'>
+        <view class='page-body-name-info'>姓名:</view>
+        <view class='page-body-name-view'>
+          <input name='name' class='page-body-name-view-input' value='{{user.name}}' type='text' maxlength='10' placeholder='请输入姓名'></input>
+        </view>
       </view>
-    </view>
 
-    <view class='page-body-gender page-body-name'>
-      <view class='page-body-gender-info page-body-name-info'>性别:</view>
-      <view class='page-body-name-view'>
-        <radio-group name='radio-gender'>
-          <label><radio value='0'>男</radio></label>
-          <label><radio value='1'>女</radio></label>
-        </radio-group>
+      <view class='page-body-gender page-body-name'>
+        <view class='page-body-gender-info page-body-name-info'>性别:</view>
+        <view class='page-body-name-view'>
+          <radio-group name='gender'>
+            <label>
+              <radio value='1' checked="{{user.gender == '1' ? true : false}}" />男</label>
+            <label>
+              <radio value='2' checked="{{user.gender == '2' ? true : false}}" />女</label>
+          </radio-group>
+        </view>
       </view>
-    </view>
+
+      <view class='page-body-phone page-body-name'>
+        <view class='page-body-name-info'>电话:</view>
+        <view class='page-body-name-view'>
+          <input name='phone' class='page-body-name-view-input' value='{{user.phone}}' type='number' placeholder='请输入联系电话'></input>
+        </view>
+      </view>
+
+      <view class='page-body-phone page-body-name'>
+        <view class='page-body-name-info'>出生日期:</view>
+        <view class='page-body-name-view'>
+          <picker name='birthday' mode='date' value='{{user.birthday}}' start="{{startDate}}" end="{{endDate}}" bindchange="bindDateChange">
+            <view class="weui-input">{{birthday}}</view>
+          </picker>
+        </view>
+      </view>
+
+      <view class='page-foot-view'>
+        <button class='page-foot-view-button' type='primary' form-type='submit'>保存</button>
+      </view>
+
+    </form>
   </view>
 </view>

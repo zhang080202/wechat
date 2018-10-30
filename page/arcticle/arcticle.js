@@ -13,35 +13,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    wx.getUserInfo({
-      success: res => {
-        console.log(res);
-        app.globalData.userInfo = res.userInfo;
-        app.globalData.hasLogin = true;
-      }
-    })
-    //登陆
-    wx.login({
-      success: res => {
-        if (res.code) {
-          wx.request({
-            url: app.globalData.url + '/user/v1/queryUserByCode',
-            method: 'GET',
-            data: {
-              code: res.code,
-              userInfo: app.globalData.userInfo
-            },
-            success: res => {
-              console.log(res);
-              that.setData({
-                user: res.data
-              })
-            }
-          })
-        }
-      }
-    })
   },
 
   /**

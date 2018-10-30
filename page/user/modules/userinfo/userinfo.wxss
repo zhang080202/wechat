@@ -3,6 +3,7 @@ label {
   min-width: 180rpx;
   margin-right: 20rpx;
 }
+
 .page-body-name {
   display: flex;
   background-color: white;
@@ -12,7 +13,7 @@ label {
 }
 
 .page-body-name-info {
-  width: 100rpx;
+  width: 140rpx;
   margin-left: 30rpx;
 }
 
@@ -24,4 +25,10 @@ label {
   height: 2.6em;
   min-height: 2.6em;
   line-height: 2.6em;
+}
+
+.page-foot-view {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
