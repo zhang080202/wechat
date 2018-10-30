@@ -33,23 +33,6 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      hasLogin: app.globalData.hasLogin
-    });
-    //获取用户授权信息
-    // wx.getSetting({
-    //   success: res => {
-    //     if (!res.authSetting['scope.userInfo']) {
-    //       wx.authorize({
-    //         scope: 'scope.userInfo',
-    //         success: res => {
-
-    //         }
-    //       })
-    //     }
-    //   }
-    // })
-
-    this.setData({
       userInfo: app.globalData.userInfo,
       hasLogin: app.globalData.hasLogin
     })

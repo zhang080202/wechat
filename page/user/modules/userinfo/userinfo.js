@@ -7,7 +7,7 @@ Page({
    */
   data: {
     user: {},
-    birthday: null,
+    birthday: '1970-01-01',
     startDate: '1970-01-01',
     endDate: '2018-10-30'
   },
