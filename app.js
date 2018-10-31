@@ -8,6 +8,9 @@ App({
       success: res => {
         console.log(res);
         that.globalData.userInfo = res.userInfo;
+      },
+      fail: res => {
+        console.log('wx.getUserInfo is fail!!');
       }
     })
     //登陆
@@ -22,6 +25,7 @@ App({
               userInfo: that.globalData.userInfo
             },
             success: ret => {
+              console.log('login success !!')
               that.globalData.user = ret.data.data;
               that.globalData.hasLogin = true;
             }
@@ -35,7 +39,7 @@ App({
     userInfo: null,
     user: {},
     openid: null,
-    // url: 'http://192.168.31.233:8080/article'
-    url: 'http://192.168.92.131:8080/article'
+    url: 'http://192.168.31.233:8080/article'
+    // url: 'http://192.168.92.131:8080/article'
   }
 })

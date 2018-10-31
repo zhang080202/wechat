@@ -36,6 +36,7 @@ Page({
       userInfo: app.globalData.userInfo,
       hasLogin: app.globalData.hasLogin
     })
+    console.log(this.data.userInfo)
   },
 
   /**

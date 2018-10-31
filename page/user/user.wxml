@@ -1,7 +1,7 @@
 <view class='container'>
   <view class='page-head'>
     <view class='page-head-center'>
-      <block wx:if="{{hasLogin === true}}">
+      <block wx:if="{{hasLogin == true}}">
         <view class='page-head-image'>
           <image class='userinfo-avatar' src='{{userInfo.avatarUrl}}' mode='cover'></image>
         </view>
@@ -9,7 +9,7 @@
           <text class='userinfo-nickName'>{{userInfo.nickName}}</text>
         </view>
       </block>
-      <block wx:if="{{hasLogin === false}}">
+      <block wx:if="{{hasLogin == false}}">
         <view class='page-head-image'>
           <image class='userinfo-avatar' src='../../image/default.jpg' mode='cover'></image>
         </view>

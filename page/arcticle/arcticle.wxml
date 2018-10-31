@@ -1,2 +1,12 @@
-<!--page/arcticle/arcticle.wxml-->
-<text>首页</text>
+<view class='container'>
+  <view class='page-head'>
+    <swiper indicator-dots='{{indicatorDots}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}'>
+      <block wx:for='{{imgUrls}}' wx:key='*this'>
+        <swiper-item>
+          <image url='{{item}}' width="355" height="150"></image>
+          <view>asd</view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+</view>
