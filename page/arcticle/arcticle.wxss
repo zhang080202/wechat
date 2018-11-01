@@ -1,1 +1,39 @@
-/* page/arcticle/arcticle.wxss */
+.container {
+  height: 100%;
+}
+.page-head {
+  height: 30%;
+}
+.page-head-image {
+  height: 100%;
+  width: 100%;
+}
+.page-body {
+  height: 70%;
+}
+.page-body-item {
+  height: 150rpx;
+  width: 100%;
+  display: flex;
+}
+.page-body-item-cnetent {
+  height: 100%;
+  width: 70%;
+  line-height: 150rpx;
+}
+.page-body-item-image {
+  height: 100%;
+  width: 30%;
+}
+.page-body-image {
+  height: 90%;
+  width: 90%;
+  margin-top: 4%;
+  margin-left: 4%;
+}
+.page-body-item-cnetent-label {
+  display: inline-block;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 800;
+  margin-left: 10rpx;
+}

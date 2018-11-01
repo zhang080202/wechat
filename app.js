@@ -24,10 +24,12 @@ App({
               code: res.code,
               userInfo: that.globalData.userInfo
             },
-            success: ret => {
-              console.log('login success !!')
+            success: ret => {              
               that.globalData.user = ret.data.data;
-              that.globalData.hasLogin = true;
+              if (that.globalData.userInfo != null) {
+                console.log('login success !!')
+                that.globalData.hasLogin = true;
+              }
             }
           })
         }
@@ -39,7 +41,7 @@ App({
     userInfo: null,
     user: {},
     openid: null,
-    url: 'http://192.168.31.233:8080/article'
-    // url: 'http://192.168.92.131:8080/article'
+    // url: 'http://192.168.31.233:8080/article'
+    url: 'http://192.168.0.19:8080/article'
   }
 })
