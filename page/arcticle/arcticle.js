@@ -6,11 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgUrls: [
-      '../../image/t1.jpg',
-      '../../image/t2.jpg',
-      '../../image/t3.jpg'
-    ],
+    imgUrls: [],
     indicatorDots: false,
     autoplay: true,
     circular: true,
@@ -24,6 +20,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
+    wx.showLoading({
+      title: '加载中',
+    });
+    //获取轮播图url
+    wx.request({
+      url: app.globalData.url + '/banner/v1/getBannerList',
+      method: 'GET',
+      success: res => {
+        console.log(res);
+        var imgUrls = [];
+        if(res.data.code == 200) {
+          for(var i=0; i < res.data.data.length; i++) {
+            imgUrls.push(res.data.data[i].url);
+          }
+          that.setData({
+            imgUrls: imgUrls
+          })
+        }
+      }
+    })
+    //获取文章列表数据
   },
 
   /**

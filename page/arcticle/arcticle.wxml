@@ -12,12 +12,16 @@
   <scroll-view class='page-body' scroll-y='true' enable-back-to-top='true' scroll-with-animation='true'>
     <!-- <block wx:for='{{list}}'> -->
       <view class='page-body-item'>
-        <view class='page-body-item-cnetent'>
-          <label class='page-body-item-cnetent-label'>{{title}}</label>
-        </view>
-        <view class='page-body-item-image'>
-          <image class='page-body-image' src='../../image/t3.jpg' mode='cnetent'></image>
-        </view>
+        <navigator class='page-body-item-navigator' url=''>
+          <view class='page-body-item-navigator-view'>
+            <view class='page-body-item-cnetent'>
+              <label class='page-body-item-cnetent-label'>{{title}}</label>
+            </view>
+            <view class='page-body-item-image'>
+              <image class='page-body-image' src='../../image/t3.jpg' mode='cnetent'></image>
+            </view>
+          </view>             
+        </navigator>
       </view>
     <!-- </block> -->
   </scroll-view>

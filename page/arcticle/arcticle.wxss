@@ -14,7 +14,8 @@
 .page-body-item {
   height: 150rpx;
   width: 100%;
-  display: flex;
+  /* display: flex; */
+  background-color: white;
 }
 .page-body-item-cnetent {
   height: 100%;
@@ -32,8 +33,16 @@
   margin-left: 4%;
 }
 .page-body-item-cnetent-label {
-  display: inline-block;
   font-family: 'Times New Roman', Times, serif;
   font-weight: 800;
-  margin-left: 10rpx;
+  margin-left: 15rpx;
+}
+.page-body-item-navigator {
+  height: 100%;
+  width: 100%;
+}
+.page-body-item-navigator-view {
+  display: flex;
+  height: 100%;
+  width: 100%;
 }
