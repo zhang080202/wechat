@@ -38,7 +38,21 @@ Page({
           that.setData({
             imgUrls: imgUrls
           })
+          //请求成功关闭 loading
+          wx.hideLoading();
         }
+        if (res.data.code == 500) {
+          wx.showToast({
+            title: '网络异常，请稍后重试',
+            icon: 'none'
+          })
+        }
+      },
+      fail: res => {
+        wx.showToast({
+          title: '网络异常，请稍后重试',
+          icon: 'none'
+        })
       }
     })
     //获取文章列表数据
