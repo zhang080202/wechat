@@ -10,19 +10,22 @@
   </view>
   
   <scroll-view class='page-body' scroll-y='true' enable-back-to-top='true' scroll-with-animation='true'>
-    <!-- <block wx:for='{{list}}'> -->
+    <block wx:for='{{list}}'>
       <view class='page-body-item'>
         <navigator class='page-body-item-navigator' url=''>
           <view class='page-body-item-navigator-view'>
             <view class='page-body-item-cnetent'>
-              <label class='page-body-item-cnetent-label'>{{title}}</label>
+              <label class='page-body-item-cnetent-label'>{{item.title}}</label>
             </view>
             <view class='page-body-item-image'>
-              <image class='page-body-image' src='../../image/t3.jpg' mode='cnetent'></image>
+              <image class='page-body-image' src='{{item.accessImage}}' mode='cnetent'></image>
             </view>
+            <!-- <block wx:if='{{item.accessImage == null}}'>
+              <image class='page-body-image' src='../../image/default.jpg' mode='cover'></image>
+            </block> -->
           </view>             
         </navigator>
       </view>
-    <!-- </block> -->
+    </block>
   </scroll-view>
 </view>

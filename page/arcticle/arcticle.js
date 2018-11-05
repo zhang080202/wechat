@@ -12,8 +12,8 @@ Page({
     circular: true,
     interval: 4000,
     duration: 1000,
-    title: '配置中关闭合法域名'
-
+    title: '配置中关闭合法域名',
+    list: []
   },
 
   /**
@@ -38,8 +38,6 @@ Page({
           that.setData({
             imgUrls: imgUrls
           })
-          //请求成功关闭 loading
-          wx.hideLoading();
         }
         if (res.data.code == 500) {
           wx.showToast({
@@ -48,6 +46,27 @@ Page({
           })
         }
       },
+    })
+    //获取文章列表数据
+    wx.request({
+      url: app.globalData.url + '/article/v1/getArticlerList/' + 1 + '/' + 10 ,
+      method: 'GET',
+      success: res => {  
+        if(res.data.code == 200) {
+          that.setData({
+            list: res.data.data.records
+          })
+        }
+        if (res.data.code == 500) {
+          wx.showToast({
+            title: '网络异常，请稍后重试',
+            icon: 'none'
+          })
+        }
+        console.log(that.data.list);
+        //请求完成关闭 loading
+        wx.hideLoading();
+      },
       fail: res => {
         wx.showToast({
           title: '网络异常，请稍后重试',
@@ -55,14 +74,13 @@ Page({
         })
       }
     })
-    //获取文章列表数据
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**
