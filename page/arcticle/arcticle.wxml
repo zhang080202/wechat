@@ -12,7 +12,7 @@
   <scroll-view class='page-body' scroll-y='true' enable-back-to-top='true' scroll-with-animation='true'>
     <block wx:for='{{list}}'>
       <view class='page-body-item'>
-        <navigator class='page-body-item-navigator' url=''>
+        <navigator class='page-body-item-navigator' url='detail/detail'>
           <view class='page-body-item-navigator-view'>
             <view class='page-body-item-cnetent'>
               <label class='page-body-item-cnetent-label'>{{item.title}}</label>

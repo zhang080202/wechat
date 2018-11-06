@@ -1,6 +1,7 @@
 {
   "pages": [
     "page/arcticle/arcticle",
+    "page/arcticle/detail/detail",
     "page/user/user",
     "page/user/modules/userinfo/userinfo"
   ],

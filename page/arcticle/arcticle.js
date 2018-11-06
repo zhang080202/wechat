@@ -29,7 +29,6 @@ Page({
       url: app.globalData.url + '/banner/v1/getBannerList',
       method: 'GET',
       success: res => {
-        console.log(res);
         var imgUrls = [];
         if(res.data.code == 200) {
           for(var i=0; i < res.data.data.length; i++) {
@@ -63,7 +62,6 @@ Page({
             icon: 'none'
           })
         }
-        console.log(that.data.list);
         //请求完成关闭 loading
         wx.hideLoading();
       },
