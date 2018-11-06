@@ -1,21 +1,36 @@
 .container {
   height: 100%;
-  border: 1px solid black;
 }
+/* 顶部标题 */
 .page-head {
   background-color: white;
   height: 200rpx;
   width: 100%;
-  display: table;
-  overflow: hidden; 
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  margin-top: 5rpx;
+   /* text-indent:2em; */
 }
 .page-head-title {
-  display: table-cell;
-  vertical-align: middle;
-  font-family: 'Times New Roman', Times, serif;
-  font-weight: 700;
+  font-family: Georgia, serif;
+  font-weight: bolder;
+  font-size: x-large;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* 颈部作者 */
+.page-neck {
+  height: 100rpx;
+  font-family: "Times New Roman",Georgia,Serif;
   font-size: small;
-  word-break: break-all;
-  word-wrap:break-word;
-  margin-left: 15rpx;
+  color: #A0A0A0;
+}
+.page-body {
+  background-color: white;
+  font-family: "Times New Roman",Georgia,Serif;
+  font-size: large;
+  font-weight: 500;
+  letter-spacing: 5rpx;
 }

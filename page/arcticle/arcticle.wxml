@@ -1,6 +1,6 @@
 <view class='container'>
   <view class='page-head'>
-    <swiper indicator-dots='{{indicatorDots}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}'>
+    <swiper indicator-dots='{{indicatorDots}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}' indicator-active-color='{{indicatorColor}}'>
       <block wx:for='{{imgUrls}}' wx:key='*this'>
         <swiper-item>
           <image class='page-head-image' src='{{item}}' mode='widthFix'></image>

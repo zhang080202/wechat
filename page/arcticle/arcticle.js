@@ -7,12 +7,13 @@ Page({
    */
   data: {
     imgUrls: [],
-    indicatorDots: false,
+    indicatorDots: true,
+    indicatorColor: '#66CCFF',
     autoplay: true,
     circular: true,
     interval: 4000,
     duration: 1000,
-    title: '配置中关闭合法域名',
+    title: '',
     list: []
   },
 

@@ -6,19 +6,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    detail: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const that = this;
     //根据文章ID 获取文章详细信息
     wx.request({
       url: app.globalData.url + '/article/v1/getArticlerById/' + options.articleId,
       method: 'GET',
       success: res => {
         console.log(res);
+        that.setData({
+          detail: res.data.data
+        })
       }
     })
   },
