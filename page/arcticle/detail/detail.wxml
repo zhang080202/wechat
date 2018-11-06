@@ -1,1 +1,8 @@
-<view>Detail Page</view>
+<view class='container'>
+  <view class='page-head'>
+    <label class='page-head-title'>这是标题</label>
+  </view>
+  <view class='page-neck'>
+    
+  </view>
+</view>

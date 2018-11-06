@@ -13,7 +13,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
+    //根据文章ID 获取文章详细信息
+    wx.request({
+      url: app.globalData.url + '/article/v1/getArticlerById/' + options.articleId,
+      method: 'GET',
+      success: res => {
+        console.log(res);
+      }
+    })
   },
 
   /**

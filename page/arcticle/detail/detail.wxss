@@ -1,0 +1,21 @@
+.container {
+  height: 100%;
+  border: 1px solid black;
+}
+.page-head {
+  background-color: white;
+  height: 200rpx;
+  width: 100%;
+  display: table;
+  overflow: hidden; 
+}
+.page-head-title {
+  display: table-cell;
+  vertical-align: middle;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 700;
+  font-size: small;
+  word-break: break-all;
+  word-wrap:break-word;
+  margin-left: 15rpx;
+}
