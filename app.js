@@ -42,8 +42,8 @@ App({
     user: {},
     openid: null,
     // prod
-    // url: 'http://www.feigly.top/article'
+    url: 'https://www.feigly.top/article'
     // url: 'http://192.168.0.19:8080/article'
-    url: 'http://192.168.31.233/article'
+    // url: 'http://192.168.31.233/article'
   }
 })
