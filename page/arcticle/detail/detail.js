@@ -14,6 +14,9 @@ Page({
    */
   onLoad: function (options) {
     const that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
     //根据文章ID 获取文章详细信息
     wx.request({
       url: app.globalData.url + '/article/v1/getArticlerById/' + options.articleId,
@@ -22,6 +25,13 @@ Page({
         console.log(res);
         that.setData({
           detail: res.data.data
+        })
+        wx.hideLoading();
+      },
+      fail: res => {
+        wx.showToast({
+          title: '网络异常，请稍后再试',
+          icon: 'none'
         })
       }
     })

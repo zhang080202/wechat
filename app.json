@@ -3,7 +3,8 @@
     "page/arcticle/arcticle",
     "page/arcticle/detail/detail",
     "page/user/user",
-    "page/user/modules/userinfo/userinfo"
+    "page/user/modules/userinfo/userinfo",
+    "page/mine/mine"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -22,6 +23,12 @@
         "iconPath": "image/imgs/icon_home_normal@3x.png",
         "selectedIconPath": "image/imgs/icon_home_highlight@3x.png",
         "text": "首页"
+      },
+      {
+        "pagePath": "page/mine/mine",
+        "iconPath": "image/imgs/icon_indent_normal@3x.png",
+        "selectedIconPath": "image/imgs/icon_indent_highlight@3x.png",
+        "text": "我的文章"
       },
       {
         "pagePath": "page/user/user",
