@@ -12,10 +12,10 @@ Component({
     imageUploadKeyChain: String, //例：'image.url'
 
     //是否在选择图片后立即上传
-    uploadImageWhenChoose: {
-      type: Boolean,
-      value: true,
-    },
+    // uploadImageWhenChoose: {
+    //   type: Boolean,
+    //   value: true,
+    // },
 
     //输入内容
     nodes: Array,
@@ -288,6 +288,7 @@ Component({
           options.formData = this.properties.imageUploadFormData;
         }
         options.success = res => {
+          console.log(res);
           const keyChain = this.properties.imageUploadKeyChain.split('.');
           let url = JSON.parse(res.data);
           keyChain.forEach(key => {
@@ -296,6 +297,10 @@ Component({
           node.attrs.src = url;
           node.attrs._uploaded = true;
           resolve();
+        }
+        options.fail = res => {
+          console.log('上传图片 发生错误 ');
+          console.log(res);
         }
         wx.uploadFile(options);
       })

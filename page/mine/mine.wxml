@@ -1,1 +1,5 @@
-<xing-editor bindfinish="finish" output-type="html" image-upload-url="http://192.168.31.233/article/oss/v1/uploadFile" image-upload-name="file" image-upload-key-chain="image.url" html="{{html}}" />
+<view class='page-title'>biaoti</view>
+<view class='page-type'>
+  <view class='page-type-des'>文章类型</view>
+</view>
+<xing-editor bindfinish="finish" output-type="html" image-upload-url="{{url}}" image-upload-name="{{filename}}" image-upload-key-chain="{{keyChain}}" html="{{html}}" />

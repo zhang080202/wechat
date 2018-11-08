@@ -27,7 +27,8 @@ App({
             success: ret => {              
               that.globalData.user = ret.data.data;
               if (that.globalData.userInfo != null) {
-                console.log('login success !!')
+                console.log('login success !!');
+                console.log(that.globalData.user);
                 that.globalData.hasLogin = true;
               }
             }
@@ -42,7 +43,7 @@ App({
     user: {},
     openid: null,
     url: 'https://www.feigly.top/article'
-    // url: 'http://192.168.0.19:8080/article'
+    // url: 'http://192.168.0.19/article'
     // url: 'http://192.168.31.233/article'
   }
 })
