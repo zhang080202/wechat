@@ -1,0 +1,1 @@
+<xing-editor bindfinish="finish" output-type="html" image-upload-url="http://192.168.31.233/article/oss/v1/uploadFile" image-upload-name="file" image-upload-key-chain="image.url" html="{{html}}" />
