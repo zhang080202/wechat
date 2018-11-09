@@ -39,12 +39,25 @@ Page({
       'article.content': e.detail.content,
       'article.image': that.data.imageId
     })
+    console.log("保存文章请求数据----->", that.data.article);
     wx.request({
       url: app.globalData.url + '/article/v1/saveArticle',
-      method: 'POST',
+      method: "POST",
       data: that.data.article,
       success: res => {
-        console.log(res);
+        if(res.data.code == 500) {
+          wx.showToast({
+            title: res.data.msg,
+            icon: "none"
+          })
+          return;
+        }
+        if(res.data.code == 200) {
+          wx.showToast({
+            title: "上传成功",
+            icon: "success"
+          })
+        }
       }
     })
   },
