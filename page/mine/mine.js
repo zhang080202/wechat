@@ -10,12 +10,13 @@ Page({
     html: '<p class="xing-p">不谈琐碎的细节，突出主题，颜色运用。这些都是行为，这些行为是纹身师的能力表达，而他们要达到一个目标：</p><img class="xing-img" style="width: 100%" src="https://www.uooyoo.com/img2017/2/15/2017021560909533.jpg" _height="0.61983" _uploaded="true"></img>',
     url: app.globalData.url + '/oss/v1/uploadFile',
     filename: 'file',
-    keyChain: 'msg',
+    keyChain: 'data.ossUrl',
     title: '', //文章标题
     articleType: 0, // 文章类型
-    image: '', // 上传的标题图片ID
+    image: '', // 标题图片
+    imageId: '', 
     types: [], // 文章类型
-    index: [],
+    index: [], // 文章类型key
     files: [],//标题图片
     indexs: 0,
     article: {
@@ -36,16 +37,16 @@ Page({
       'article.title': that.data.title,
       'article.articleType': that.data.articleType,
       'article.content': e.detail.content,
-      'article.image': that.data.image
+      'article.image': that.data.imageId
     })
-    // wx.request({
-    //   url: app.globalData.url + '/article/v1/saveArticle',
-    //   method: 'POST',
-    //   data: that.data.article,
-    //   success: res => {
-    //     console.log(res);
-    //   }
-    // })
+    wx.request({
+      url: app.globalData.url + '/article/v1/saveArticle',
+      method: 'POST',
+      data: that.data.article,
+      success: res => {
+        console.log(res);
+      }
+    })
   },
   //绑定文章标题输入框失去焦点事件
   bindBlur: function(e) {
@@ -98,8 +99,10 @@ Page({
               title: '上传成功',
               icon: 'success'
             });
+            console.log("上传图片 ", res);
             that.setData({
-              image: JSON.parse(res.data).msg
+              image: JSON.parse(res.data).data.ossUrl,
+              imageId: JSON.parse(res.data).data.ossId
             });
           },
           fail: res => {
@@ -129,7 +132,23 @@ Page({
       showCancel: true,
       success: res => {
         if(res.confirm) {
-          //TODO 删除阿里云OSS上的文件
+          //删除阿里云OSS上的文件
+          wx.request({
+            url: app.globalData.url + '/oss/v1/deleteImage/' + that.data.imageId,
+            method: 'DELETE',
+            success: res => {
+              console.log("删除成功", res);
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success'
+              })
+            },
+            fail: res => {
+              console.log("删除标题图片失败", res);
+              return;
+            }
+          })
+
           that.setData({
             files: [],
             image: ""
@@ -140,6 +159,28 @@ Page({
       }
     })
   },
+  /**
+   * 删除阿里云OSS上的文件
+   */
+  // deleteOssImgSync: function() {
+  //   var that = this;
+  //   wx.request({
+  //     url: app.globalData.url + '/oss/v1/deleteImage/' + that.data.imageId,
+  //     method: 'DELETE',
+  //     success: res => {
+  //       console.log("删除成功", res);
+  //       wx.showToast({
+  //         title: '删除成功',
+  //         icon: 'success'
+  //       })
+  //       return '1';
+  //     },
+  //     fail: res => {
+  //       console.log("删除标题图片失败", res);
+  //       return 0;
+  //     }
+  //   })
+  // },
 
   /**
    * 获取下拉框值
