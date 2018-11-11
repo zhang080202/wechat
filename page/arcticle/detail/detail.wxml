@@ -3,8 +3,8 @@
     <label class='page-head-title'>{{detail.title}}</label>
   </view>
   <view class='page-neck'>
-    <view class='page-neck-author'>作者：高小慧</view>
-    <view class='page-neck-time'>发布时间：2018-09-09</view>
+    <view class='page-neck-author'>作者：{{detail.createUser}}</view>
+    <view class='page-neck-time'>发布时间：{{detail.passTime}}</view>
   </view>
   <view class='page-body'>{{detail.content}}</view>
 </scroll-view>

@@ -16,7 +16,7 @@
     <scroll-view class='page-body' scroll-y='true' enable-back-to-top='true' scroll-with-animation='true'>
       <block wx:for='{{list}}'>
         <view class='page-body-item'>
-          <!-- <navigator class='page-body-item-navigator' url='detail/detail?articleId={{item.articleId}}'> -->
+          <navigator class='page-body-item-navigator' url='../arcticle/detail/detail?articleId={{item.articleId}}'>
             <view class='page-body-item-navigator-view'>
               <view class='page-body-item-cnetent'>
                 <label class='page-body-item-cnetent-label'>{{item.title}}</label>
@@ -31,17 +31,17 @@
                 <block wx:if="{{item.status == 2}}">
                   <view class="page-body-item-image-status page-body-item-image-status_3">已审核</view>
                 </block>
-                <view class="page-body-item-image-op">
+                <!-- <view class="page-body-item-image-op">
                   <view bindtap="clickOp" data-id="{{item.articleId}}" class="page-body-item-image-op1">操作</view>
                   <view class="page-body-item-image-op-view {{cid == item.articleId ? 'showView' : 'hidenView'}}" >
                     <view class="page-body-item-image-op-view-item"><label class="_label">编辑</label></view>
-                    <!-- <view class="page-body-item-image-op-view-item"><label class="_label">预览</label></view>
-                    <view class="page-body-item-image-op-view-item"><label class="_label">审核</label></view> -->
+                    <view class="page-body-item-image-op-view-item"><label class="_label">预览</label></view>
+                    <view class="page-body-item-image-op-view-item"><label class="_label">审核</label></view>
                   </view>
-                </view>
+                </view> -->
               </view>
             </view>
-          <!-- </navigator> -->
+          </navigator>
         </view>
       </block>
     </scroll-view>

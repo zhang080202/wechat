@@ -43,9 +43,11 @@ Page({
       url: app.globalData.url + '/article/v1/getArticlerList/' + 1 + '/' + 10,
       method: 'GET',
       success: res => {
+        console.log("我的文章列表返回数据 ----> ", res);
         if (res.data.code == 200) {
           that.setData({
-            list: res.data.data.records
+            list: res.data.data.records,
+            articleNum: res.data.data.total
           })
         }
         if (res.data.code == 500) {

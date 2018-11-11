@@ -68,12 +68,12 @@
   width: 30%;
   color: #A8A8A8;
   font-size: 25rpx;
-  display: flex;
-  justify-content: space-between;
+  /* display: flex;
+  justify-content: space-between; */
   line-height: 150rpx;
 }
 .page-body-item-image-status_1{
-  color: red;
+  color: #A8A8A8;
 }
 .page-body-item-image-status_2{
   color: #780000;
@@ -85,12 +85,12 @@
   margin-left: 15rpx;
 }
 
-.page-body-item-image-op {
+/* .page-body-item-image-op {
   margin-right: 20rpx;
   color: blue;
   width: 80rpx;
-}
-.page-body-item-image-op-view {
+} */
+/* .page-body-item-image-op-view {
   background-color: #F8F8F8;
   position: relative;
   margin-top: -60rpx;
@@ -104,16 +104,16 @@
   height: 50rpx;
   width: 100%;
   border: 1px solid red;
-  z-index: -1;
+  z-index: -999;
 }
 ._label {
   display: block;
-  /* position: relative;
-  margin-top: -50rpx; */
+  position: relative;
+  margin-top: -50rpx;
   height: 100%;
   z-index: 1;
   border: 1px solid black;
-}
+} */
 .showView {
   display: block;
 }
