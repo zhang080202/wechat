@@ -1,50 +1,52 @@
-<view class="weui-cells__title">文章标题</view>
-<view class="weui-cells weui-cells_after-title">
-  <view class="weui-cell weui-cell_input">
-    <view class="weui-cell__bd">
-      <input class="weui-input" name="title" bindblur="bindBlur" placeholder="请输入您的文章标题" />
-    </view>
-  </view>
-</view>
-<view class="weui-cells__title">文章类型</view>
-<view class="weui-cells weui-cells_after-title">
-  <view class="weui-cell weui-cell_input">
-    <view class="weui-cell__hd">
-      <view class="weui-label">当前选择</view>
-    </view>
-    <view class="weui-cell__bd">
-      <picker bindchange="bindPickerChange" value="{{indexs}}" range="{{types}}">
-        <view class="weui-input">{{types[indexs]}}</view>
-      </picker>
-    </view>
-  </view>
+<view class="swiper-tab">
+  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">公开文章</view>
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">私密文章</view>
 </view>
 
-<view class="weui-cells__title">标题图片</view>
-<view class="weui-cells">
-  <view class="weui-cell">
-    <view class="weui-cell__bd">
-      <view class="weui-uploader">
-        <view class="weui-uploader__hd">
-          <view class="weui-uploader__title">图片上传</view>
-          <view class="weui-uploader__info">{{files.length}}/1</view>
-        </view>
-        <view class="weui-uploader__bd">
-          <view class="weui-uploader__files" id="uploaderFiles">
-            <block wx:for="{{files}}" wx:key="*this">
-              <view class="weui-uploader__file" bindtap="previewImage" bindlongpress="deleteImg" id="{{item}}">
-                <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
-              </view>
-            </block>
-          </view>
-          <view class="weui-uploader__input-box">
-            <view class="weui-uploader__input" bindtap="chooseImage"></view>
-          </view>
-        </view>
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
+  <swiper-item>
+    <view class="page-neck">
+      <view class="page-neck-num">文章数量:{{articleNum}}</view>
+      <view class="page-neck-navi">
+        <navigator url='list/list'>
+          新增文章
+        </navigator>
       </view>
     </view>
-  </view>
-</view>
-
-<view class="weui-cells__title">文章内容</view>
-<xing-editor bindfinish="finish" output-type="html" image-upload-url="{{url}}" image-upload-name="{{filename}}" image-upload-key-chain="{{keyChain}}" html="{{html}}" />
+    <scroll-view class='page-body' scroll-y='true' enable-back-to-top='true' scroll-with-animation='true'>
+      <block wx:for='{{list}}'>
+        <view class='page-body-item'>
+          <!-- <navigator class='page-body-item-navigator' url='detail/detail?articleId={{item.articleId}}'> -->
+            <view class='page-body-item-navigator-view'>
+              <view class='page-body-item-cnetent'>
+                <label class='page-body-item-cnetent-label'>{{item.title}}</label>
+              </view>
+              <view class='page-body-item-image'>
+                <block wx:if="{{item.status == 0}}">
+                  <view class="page-body-item-image-status page-body-item-image-status_1">未审核</view>
+                </block>
+                <block wx:if="{{item.status == 1}}">
+                  <view class="page-body-item-image-status page-body-item-image-status_2">审核中</view>
+                </block>
+                <block wx:if="{{item.status == 2}}">
+                  <view class="page-body-item-image-status page-body-item-image-status_3">已审核</view>
+                </block>
+                <view class="page-body-item-image-op">
+                  <view bindtap="clickOp" data-id="{{item.articleId}}" class="page-body-item-image-op1">操作</view>
+                  <view class="page-body-item-image-op-view {{cid == item.articleId ? 'showView' : 'hidenView'}}" >
+                    <view class="page-body-item-image-op-view-item"><label class="_label">编辑</label></view>
+                    <!-- <view class="page-body-item-image-op-view-item"><label class="_label">预览</label></view>
+                    <view class="page-body-item-image-op-view-item"><label class="_label">审核</label></view> -->
+                  </view>
+                </view>
+              </view>
+            </view>
+          <!-- </navigator> -->
+        </view>
+      </block>
+    </scroll-view>
+  </swiper-item>
+  <swiper-item>
+    <view>私密文章</view>
+  </swiper-item>
+</swiper>
