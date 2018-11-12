@@ -21,7 +21,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     var that = this;
 
     /**
@@ -29,7 +29,7 @@ Page({
      */
     wx.getSystemInfo({
 
-      success: function (res) {
+      success: function(res) {
         that.setData({
           winWidth: res.windowWidth,
           winHeight: res.windowHeight
@@ -68,18 +68,20 @@ Page({
     })
   },
   /**
-     * 滑动切换tab
-     */
-  bindChange: function (e) {
+   * 滑动切换tab
+   */
+  bindChange: function(e) {
 
     var that = this;
-    that.setData({ currentTab: e.detail.current });
+    that.setData({
+      currentTab: e.detail.current
+    });
 
   },
   /**
    * 点击tab切换
    */
-  swichNav: function (e) {
+  swichNav: function(e) {
 
     var that = this;
 
@@ -95,7 +97,7 @@ Page({
   /**
    * 操作点击事件
    */
-  clickOp: function (e) {
+  clickOp: function(e) {
     console.log("clicl event ", e.currentTarget.dataset.id);
     var that = this;
     if (that.data.cid == e.currentTarget.dataset.id) {
@@ -114,49 +116,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })
