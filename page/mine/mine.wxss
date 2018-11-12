@@ -1,1 +1,147 @@
 /* page/mine/mine.wxss */
+
+.swiper-tab {
+  width: 100%;
+  border-bottom: 2rpx solid #777;
+  text-align: center;
+  line-height: 80rpx;
+  background-color: white;
+  margin-top: 3rpx;
+}
+
+.swiper-tab-list {
+  font-size: 30rpx;
+  display: inline-block;
+  width: 50%;
+  color: #777;
+}
+
+.on {
+  color: #0099CC;
+  border-bottom: 5rpx solid #0099CC;
+}
+
+.swiper-box {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.swiper-box view {
+  text-align: center;
+}
+
+.page-neck {
+  display: flex;
+  justify-content: space-between;
+  color: #A8A8A8;
+  font-size: 27rpx;
+}
+
+.page-neck-num {
+  margin-left: 20rpx;
+}
+
+.page-neck-navi {
+  margin-right: 20rpx;
+}
+
+.page-body {
+  height: 100%;
+}
+.page-body-item {
+  height: 150rpx;
+  width: 100%;
+  /* display: flex; */
+  background-color: white;
+  margin-top: 5rpx;
+}
+.page-body-item-cnetent {
+  height: 100%;
+  width: 70%;
+  display: table;
+  overflow: hidden; 
+}
+.page-body-item-image {
+  height: 100%;
+  width: 30%;
+  color: #A8A8A8;
+  font-size: 25rpx;
+  /* display: flex;
+  justify-content: space-between; */
+  line-height: 150rpx;
+}
+.page-body-item-image-status_1{
+  color: #A8A8A8;
+}
+.page-body-item-image-status_2{
+  color: #780000;
+}
+.page-body-item-image-status_3 {
+  color: green;
+}
+.page-body-item-image-status {
+  margin-left: 15rpx;
+}
+
+/* .page-body-item-image-op {
+  margin-right: 20rpx;
+  color: blue;
+  width: 80rpx;
+} */
+/* .page-body-item-image-op-view {
+  background-color: #F8F8F8;
+  position: relative;
+  margin-top: -60rpx;
+  width: 80rpx;
+  border: 1px solid black;
+}
+.page-body-item-image-op1 {
+  z-index: 999;
+}
+.page-body-item-image-op-view-item {
+  height: 50rpx;
+  width: 100%;
+  border: 1px solid red;
+  z-index: -999;
+}
+._label {
+  display: block;
+  position: relative;
+  margin-top: -50rpx;
+  height: 100%;
+  z-index: 1;
+  border: 1px solid black;
+} */
+.showView {
+  display: block;
+}
+.hidenView {
+  display: none;
+}
+/* .page-body-image {
+  height: 90%;
+  width: 90%;
+  margin-top: 4%;
+  margin-left: 4%;
+} */
+.page-body-item-cnetent-label {
+  display: table-cell;
+  vertical-align: middle;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 700;
+  font-size: small;
+  word-break: break-all;
+  word-wrap:break-word;
+  margin-left: 15rpx;
+}
+.page-body-item-navigator {
+  height: 100%;
+  width: 100%;
+}
+.page-body-item-navigator-view {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}

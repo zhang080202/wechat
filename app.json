@@ -4,7 +4,8 @@
     "page/arcticle/detail/detail",
     "page/user/user",
     "page/user/modules/userinfo/userinfo",
-    "page/mine/mine"
+    "page/mine/mine",
+    "page/mine/list/list"
   ],
   "window": {
     "navigationBarTextStyle": "black",

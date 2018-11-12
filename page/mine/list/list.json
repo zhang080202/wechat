@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "xing-editor": "../../common/editor/xing-editor"
+  },
+  "navigationBarTitleText": "编辑文章"
+}
