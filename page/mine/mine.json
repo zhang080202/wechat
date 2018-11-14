@@ -1,3 +1,10 @@
 {
-  "navigationBarTitleText": "我的文章"
+  "navigationBarTitleText": "我的文章",
+  "usingComponents": {
+    "i-icon": "../../dist/icon/index",
+    "i-row": "../../dist/row/index",
+    "i-col": "../../dist/col/index",
+    "i-modal": "../../dist/modal/index",
+    "i-action-sheet": "../../dist/action-sheet/index"
+  }
 }

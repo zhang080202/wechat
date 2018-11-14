@@ -6,18 +6,40 @@
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
   <swiper-item>
     <view class="page-neck">
-      <view class="page-neck-num">文章数量:{{articleNum}}</view>
-      <view class="page-neck-navi">
-        <navigator url='list/list'>
-          新增文章
-        </navigator>
-      </view>
+      <i-row i-class="col-class">
+        <i-col span="8" offset="1">
+          文章数量 : {{articleNum}}
+        </i-col>
+        <i-col span="2" offset="12">
+          <navigator url='list/list'>
+            <i-icon type="add" size="28" color="#80848f" />
+          </navigator>
+        </i-col>
+      </i-row>
     </view>
     <scroll-view class='page-body' scroll-y='true' enable-back-to-top='true' scroll-with-animation='true'>
       <block wx:for='{{list}}'>
-        <view class='page-body-item'>
-          <navigator class='page-body-item-navigator' url='../arcticle/detail/detail?articleId={{item.articleId}}'>
-            <view class='page-body-item-navigator-view'>
+        <view class='page-body-item' bindtap="clickItem" data-id='{{item.articleId}}'>
+          <!-- <navigator class='page-body-item-navigator' url='../arcticle/detail/detail?articleId={{item.articleId}}'> -->
+          <i-row class="page-body-irow">
+            <i-col span="16" offset="1" class="page-body-item-cnetent-label">{{item.title}}</i-col>
+            <i-col span="4" offset="2">
+              <view class='page-body-item-image'>
+                <block wx:if="{{item.status == 0}}">
+                  <view class="page-body-item-image-status_1">未审核</view>
+                </block>
+                <block wx:if="{{item.status == 1}}">
+                  <view class="page-body-item-image-status_2">审核中</view>
+                </block>
+                <block wx:if="{{item.status == 2}}">
+                  <view class="page-body-item-image-status_3">已审核</view>
+                </block>
+              </view>
+            </i-col>
+          </i-row>
+
+
+          <!-- <view class='page-body-item-navigator-view'>
               <view class='page-body-item-cnetent'>
                 <label class='page-body-item-cnetent-label'>{{item.title}}</label>
               </view>
@@ -31,22 +53,27 @@
                 <block wx:if="{{item.status == 2}}">
                   <view class="page-body-item-image-status page-body-item-image-status_3">已审核</view>
                 </block>
-                <!-- <view class="page-body-item-image-op">
-                  <view bindtap="clickOp" data-id="{{item.articleId}}" class="page-body-item-image-op1">操作</view>
-                  <view class="page-body-item-image-op-view {{cid == item.articleId ? 'showView' : 'hidenView'}}" >
-                    <view class="page-body-item-image-op-view-item"><label class="_label">编辑</label></view>
-                    <view class="page-body-item-image-op-view-item"><label class="_label">预览</label></view>
-                    <view class="page-body-item-image-op-view-item"><label class="_label">审核</label></view>
-                  </view>
-                </view> -->
               </view>
-            </view>
-          </navigator>
+            </view> -->
+          <!-- </navigator> -->
         </view>
       </block>
     </scroll-view>
   </swiper-item>
   <swiper-item>
     <view>私密文章</view>
+    <i-row i-class="col-class">
+      <i-col span="24" i-class="col-class">
+        <i-icon type="add" size="28" color="#80848f" />
+      </i-col>
+    </i-row>
   </swiper-item>
 </swiper>
+
+<!-- Modal操作框 -->
+<!-- <i-modal title="您想对该文章干嘛" show-cancel="true" visible="{{ visible }}" actions="{{ actions }}" action-mode="{{ vertical }}" bind:click="handleClick" /> -->
+<i-action-sheet visible="{{ visible }}" actions="{{ actions }}" show-cancel bind:cancel="handleClose" bind:click="handleClick" />
+<i-modal title="温馨提示" visible="{{ visible1 }}" bind:ok="handleSubmit" bind:cancel="handleClose1">
+    <view>审核将在24小时内完成，请耐心等待</view>
+    <view>审核通过后即可将文章公开</view>
+</i-modal>
