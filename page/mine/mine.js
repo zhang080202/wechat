@@ -192,7 +192,18 @@ Page({
       url: '',
       method: "GET",
       success: res => {
-
+        if(res.data.code == 200) {
+          wx.showToast({
+            title: "提交成功",
+            icon: "success"
+          })
+        }
+        if (res.data.code == 500) {
+          wx.showToast({
+            title: "网络异常，请稍后再试",
+            icon: "none"
+          })
+        }
       },
       fail: res => {
         wx.showToast({
