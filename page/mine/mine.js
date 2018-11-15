@@ -16,6 +16,7 @@ Page({
     status: 0,
     showView: false,
     cid: 0,
+    visible2: false, //删除文章Modal
     visible1: false, //提交审核Modal
     visible: false,// Modal 是否显示
     actions: [
@@ -24,6 +25,9 @@ Page({
         },
         {
           name: '编辑'
+        },
+        {
+          name: '删除'
         },
         {
           name: '提交审核'
@@ -36,7 +40,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-
+    
     /**
      * 获取系统信息
      */
@@ -51,9 +55,26 @@ Page({
 
     });
 
+    if (that.data.currentTab == 0) {
+      //私密文章
+      this.getArticlerList(1);
+    } else if (that.data.currentTab == 1) {
+      //公开文章
+      this.getArticlerList(0);
+    }
+  },
+
+  /**
+   * 获取文章列表
+   */
+  getArticlerList: function(e) {
+    var that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
     //获取文章列表数据
     wx.request({
-      url: app.globalData.url + '/article/v1/getArticlerList/' + 1 + '/' + 10,
+      url: app.globalData.url + '/article/v1/getArticlerListByUser/' + 1 + '/' + 10 + "/" + e + "/" + app.globalData.user.userId,
       method: 'GET',
       success: res => {
         console.log("我的文章列表返回数据 ----> ", res);
@@ -84,19 +105,25 @@ Page({
    * 滑动切换tab
    */
   bindChange: function (e) {
-
+    console.log("滑动切换tab", e);
     var that = this;
     that.setData({
       currentTab: e.detail.current
     });
-
+    if (that.data.currentTab == 0) {
+      //私密文章
+      this.getArticlerList(1);
+    } else if (that.data.currentTab == 1) {
+      //公开文章
+      this.getArticlerList(0);
+    }
   },
   /**
    * 点击tab切换
    */
   swichNav: function (e) {
-
     var that = this;
+    console.log("点击tab切换", e);
 
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
@@ -105,13 +132,20 @@ Page({
         currentTab: e.target.dataset.current
       })
     }
+    if (that.data.currentTab == 0) {
+      //私密文章
+      this.getArticlerList(1);
+    } else if (that.data.currentTab == 1) {
+      //公开文章
+      this.getArticlerList(0);
+    }
   },
 
   /**
    * 操作点击事件
    */
   clickOp: function (e) {
-    console.log("clicl event ", e.currentTarget.dataset.id);
+    console.log("click event ", e.currentTarget.dataset.id);
     var that = this;
     if (that.data.cid == e.currentTarget.dataset.id) {
       that.setData({
@@ -152,18 +186,62 @@ Page({
     if(op == 1) {
 
     }
-    //提交审核
+    //删除
     if(op == 2) {
+      this.setData({
+        visible2: true
+      })
+    }
+    //提交审核
+    if(op == 3) {
       this.setData({
         visible1: true
       })
     }
     //取消Modal
-    if(op == 3) {
+    if(op == 4) {
       this.setData({
         visible: false
       })
     }
+  },
+
+  //删除文章
+  deleteArticle: function(e) {
+    var that = this;
+    wx.showLoading({
+      title: '删除中',
+    });
+
+    wx.request({
+      url: app.globalData.url + '/article/v1/deleteArticle/' + that.data.cid + "/" + app.globalData.user.userId,
+      method: "DELETE",
+      success: res => {
+        if (res.data.code == 200) {
+          wx.showToast({
+            title: '删除成功',
+            icon: 'success'
+          });
+          this.setData({
+            visible: false,
+            visible2: false
+          });
+          that.onLoad();
+        }
+        if (res.data.code == 500) {
+          wx.showToast({
+            title: '网络异常，请稍后重试',
+            icon: 'none'
+          })
+        }
+      },
+      fail: res => {
+        wx.showToast({
+          title: '网络异常，请稍后重试',
+          icon: 'none'
+        })
+      }
+    })
   },
 
   /**
@@ -172,6 +250,15 @@ Page({
   handleClose1: function(e) {
     this.setData({
       visible1: false
+    })
+  },
+
+  /**
+   * 关闭删除Modal
+   */
+  handleClose2: function (e) {
+    this.setData({
+      visible2: false
     })
   },
 
@@ -185,23 +272,33 @@ Page({
    * 提交审核
    */
   handleSubmit: function(e) {
+    var that = this;
     wx.showLoading({
       title: '提交中'
     })
     wx.request({
-      url: '',
+      url: app.globalData.url + '/article/v1/submitCheck/' + that.data.cid,
       method: "GET",
       success: res => {
+        console.log("---------->", res);
         if(res.data.code == 200) {
           wx.showToast({
             title: "提交成功",
             icon: "success"
-          })
+          });
+          this.setData({
+            visible: false,
+            visible1: false
+          });
+          that.onLoad();
         }
         if (res.data.code == 500) {
           wx.showToast({
-            title: "网络异常，请稍后再试",
+            title: res.data.msg,
             icon: "none"
+          });
+          this.setData({
+            visible1: false
           })
         }
       },
@@ -212,6 +309,13 @@ Page({
         })
       }
     })
+  },
+
+  /**
+   * 确认删除文章
+   */
+  handleSubmit1: function(e) {
+    this.deleteArticle();
   },
 
   /**
@@ -246,7 +350,9 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.onLoad();
+    // 停止下拉动作
+    wx.stopPullDownRefresh();
   },
 
   /**

@@ -1,6 +1,6 @@
 <view class="swiper-tab">
-  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">公开文章</view>
-  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">私密文章</view>
+  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">私密文章</view>
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">公开文章</view>
 </view>
 
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
@@ -34,6 +34,9 @@
                 <block wx:if="{{item.status == 2}}">
                   <view class="page-body-item-image-status_3">已审核</view>
                 </block>
+                <block wx:if="{{item.status == 3}}">
+                  <view class="page-body-item-image-status_2">未通过</view>
+                </block>
               </view>
             </i-col>
           </i-row>
@@ -61,12 +64,28 @@
     </scroll-view>
   </swiper-item>
   <swiper-item>
-    <view>私密文章</view>
-    <i-row i-class="col-class">
-      <i-col span="24" i-class="col-class">
-        <i-icon type="add" size="28" color="#80848f" />
-      </i-col>
-    </i-row>
+    <view class="page-neck">
+      <i-row i-class="col-class">
+        <i-col span="8" offset="1">
+          文章数量 : {{articleNum}}
+        </i-col>
+        <i-col span="2" offset="12">
+          <navigator url='list/list'>
+            <i-icon type="add" size="28" color="#80848f" />
+          </navigator>
+        </i-col>
+      </i-row>
+    </view>
+    <scroll-view class='page-body' scroll-y='true' enable-back-to-top='true' scroll-with-animation='true'>
+      <block wx:for='{{list}}'>
+        <view class='page-body-item' bindtap="clickItem" data-id='{{item.articleId}}'>
+          <!-- <navigator class='page-body-item-navigator' url='../arcticle/detail/detail?articleId={{item.articleId}}'> -->
+          <i-row class="page-body-irow">
+            <i-col span="16" offset="1" class="page-body-item-cnetent-label">{{item.title}}</i-col>
+          </i-row>
+        </view>
+      </block>
+    </scroll-view>
   </swiper-item>
 </swiper>
 
@@ -76,4 +95,7 @@
 <i-modal title="温馨提示" visible="{{ visible1 }}" bind:ok="handleSubmit" bind:cancel="handleClose1">
     <view>审核将在24小时内完成，请耐心等待</view>
     <view>审核通过后即可将文章公开</view>
+</i-modal>
+<i-modal title="温馨提示" visible="{{ visible2 }}" bind:ok="handleSubmit1" bind:cancel="handleClose2">
+    <view>确定要删除该文章吗？</view>
 </i-modal>
