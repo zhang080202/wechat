@@ -20,18 +20,18 @@ Page({
     visible1: false, //提交审核Modal
     visible: false,// Modal 是否显示
     actions: [
-        {
-          name: '预览'
-        },
-        {
-          name: '编辑'
-        },
-        {
-          name: '删除'
-        },
-        {
-          name: '提交审核'
-        }
+      {
+        name: '预览'
+      },
+      {
+        name: '编辑'
+      },
+      {
+        name: '删除'
+      },
+      {
+        name: '提交审核'
+      }
     ]
   },
 
@@ -40,7 +40,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    
+
     /**
      * 获取系统信息
      */
@@ -67,7 +67,7 @@ Page({
   /**
    * 获取文章列表
    */
-  getArticlerList: function(e) {
+  getArticlerList: function (e) {
     var that = this;
     wx.showLoading({
       title: '加载中',
@@ -163,51 +163,88 @@ Page({
   /**
    * 点击item 弹出modal事件
    */
-  clickItem: function(e) {
+  clickItem: function (e) {
+    var that = this;
     this.setData({
-      visible: true,
       cid: e.currentTarget.dataset.id
     })
+    new Promise(function (resolve, reject) {
+      wx.request({
+        url: app.globalData.url + "/article/v1/getArticleStatus/" + that.data.cid,
+        method: "GET",
+        success: res => {
+          console.log("获取当前文章状态", res);
+          if (res.data.code == 200) {
+            resolve(res.data.data.status);
+          }
+        }
+      })
+    }).then(function (e) {
+      console.log("--------- status-------------", e);
+      console.log("------------actions--------", that.data.actions)
+      that.data.actions;
+      that.setData({
+        visible: true
+      });
+    })
+
   },
 
   /**
    * 点击Modal 中的按钮
    */
-  handleClick: function(e) {
+  handleClick: function (e) {
     console.log("Modal 返回值 ", e);
     const op = e.detail.index;
     // 预览
-    if(op == 0) {
+    if (op == 0) {
       wx.navigateTo({
         url: '../arcticle/detail/detail?articleId=' + this.data.cid,
       })
     }
     //编辑
-    if(op == 1) {
+    if (op == 1) {
 
     }
     //删除
-    if(op == 2) {
+    if (op == 2) {
       this.setData({
         visible2: true
       })
     }
     //提交审核
-    if(op == 3) {
+    if (op == 3) {
       this.setData({
         visible1: true
       })
     }
     //取消Modal
-    if(op == 4) {
+    if (op == 4) {
       this.setData({
         visible: false
       })
     }
   },
 
+  /**
+   * 获取当前文章状态
+   */
+  // getArticleStatus: function (e) {
+  //   var that = this;
+  //   wx.request({
+  //     url: app.globalData.url + "/article/v1/getArticleStatus/" + that.data.cid,
+  //     method: "GET",
+  //     success: res => {
+  //       console.log("获取当前文章状态", res);
+  //       if (res.data.code == 200) {
+  //         return res.data.data.status;
+  //       }
+  //     }
+  //   })
+  // },
+
   //删除文章
-  deleteArticle: function(e) {
+  deleteArticle: function (e) {
     var that = this;
     wx.showLoading({
       title: '删除中',
@@ -247,7 +284,7 @@ Page({
   /**
    * 关闭提交审核Modal
    */
-  handleClose1: function(e) {
+  handleClose1: function (e) {
     this.setData({
       visible1: false
     })
@@ -271,7 +308,7 @@ Page({
   /**
    * 提交审核
    */
-  handleSubmit: function(e) {
+  handleSubmit: function (e) {
     var that = this;
     wx.showLoading({
       title: '提交中'
@@ -281,7 +318,7 @@ Page({
       method: "GET",
       success: res => {
         console.log("---------->", res);
-        if(res.data.code == 200) {
+        if (res.data.code == 200) {
           wx.showToast({
             title: "提交成功",
             icon: "success"
@@ -314,7 +351,7 @@ Page({
   /**
    * 确认删除文章
    */
-  handleSubmit1: function(e) {
+  handleSubmit1: function (e) {
     this.deleteArticle();
   },
 
