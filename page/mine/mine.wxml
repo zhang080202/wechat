@@ -19,7 +19,7 @@
     </view>
     <scroll-view class='page-body' scroll-y='true' enable-back-to-top='true' scroll-with-animation='true'>
       <block wx:for='{{list}}'>
-        <view class='page-body-item' bindtap="clickItem" data-id='{{item.articleId}}'>
+        <view class='page-body-item' bindtap="clickItem" data-id='{{item.articleId}}' data-status="{{item.status}}" data-isPrivate='{{item.isPrivate}}'>
           <!-- <navigator class='page-body-item-navigator' url='../arcticle/detail/detail?articleId={{item.articleId}}'> -->
           <i-row class="page-body-irow">
             <i-col span="16" offset="1" class="page-body-item-cnetent-label">{{item.title}}</i-col>
@@ -67,7 +67,7 @@
     <view class="page-neck">
       <i-row i-class="col-class">
         <i-col span="8" offset="1">
-          文章数量 : {{articleNum}}
+          <i-tag>文章数量 : {{articleNum}}</i-tag>
         </i-col>
         <i-col span="2" offset="12">
           <navigator url='list/list'>
@@ -78,7 +78,7 @@
     </view>
     <scroll-view class='page-body' scroll-y='true' enable-back-to-top='true' scroll-with-animation='true'>
       <block wx:for='{{list}}'>
-        <view class='page-body-item' bindtap="clickItem" data-id='{{item.articleId}}'>
+        <view class='page-body-item' bindtap="clickItem" data-id='{{item.articleId}}' data-status="{{item.status}}" data-isPrivate='{{item.isPrivate}}'>
           <!-- <navigator class='page-body-item-navigator' url='../arcticle/detail/detail?articleId={{item.articleId}}'> -->
           <i-row class="page-body-irow">
             <i-col span="16" offset="1" class="page-body-item-cnetent-label">{{item.title}}</i-col>
@@ -91,7 +91,11 @@
 
 <!-- Modal操作框 -->
 <!-- <i-modal title="您想对该文章干嘛" show-cancel="true" visible="{{ visible }}" actions="{{ actions }}" action-mode="{{ vertical }}" bind:click="handleClick" /> -->
-<i-action-sheet visible="{{ visible }}" actions="{{ actions }}" show-cancel bind:cancel="handleClose" bind:click="handleClick" />
+<i-action-sheet visible="{{ visible }}" actions="{{ actions }}" show-cancel bind:cancel="handleClose" bind:click="handleClick" data-flag="sheet1" />
+<i-action-sheet visible="{{ visible_2 }}" actions="{{ actions2 }}" show-cancel bind:cancel="handleClose" bind:click="handleClick" data-flag="sheet2" />
+<i-action-sheet visible="{{ visible_3 }}" actions="{{ actions3 }}" show-cancel bind:cancel="handleClose" bind:click="handleClick" data-flag="sheet3" />
+<i-action-sheet visible="{{ visible_4 }}" actions="{{ actions4 }}" show-cancel bind:cancel="handleClose" bind:click="handleClick" data-flag="sheet4" />
+
 <i-modal title="温馨提示" visible="{{ visible1 }}" bind:ok="handleSubmit" bind:cancel="handleClose1">
     <view>审核将在24小时内完成，请耐心等待</view>
     <view>审核通过后即可将文章公开</view>
@@ -99,3 +103,13 @@
 <i-modal title="温馨提示" visible="{{ visible2 }}" bind:ok="handleSubmit1" bind:cancel="handleClose2">
     <view>确定要删除该文章吗？</view>
 </i-modal>
+<i-modal title="温馨提示" visible="{{ visible3 }}" bind:ok="handleSubmit2" bind:cancel="handleClose3">
+    <view>确定要撤销审核吗？</view>
+</i-modal>
+<i-modal title="温馨提示" visible="{{ visible4 }}" bind:ok="handleSubmit3" bind:cancel="handleClose4">
+    <view>文章设置公开将对所有用户可见</view>
+</i-modal>
+<i-modal title="温馨提示" visible="{{ visible5 }}" bind:ok="handleSubmit4" bind:cancel="handleClose5">
+    <view>文章设置私密后仅自己可见</view>
+</i-modal>
+<i-message id="message" />

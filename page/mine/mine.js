@@ -1,5 +1,6 @@
 // page/mine/mine.js
 const app = getApp();
+const { $Message } = require('../../dist/base/index');
 
 Page({
 
@@ -15,10 +16,18 @@ Page({
     list: [],
     status: 0,
     showView: false,
-    cid: 0,
+    cid: 0, // 文章ID
+    status: 0, // 文章状态
+    isPrivate: false,
+    visible5: false, 
+    visible4: false, //
+    visible3: false, //撤销审核
     visible2: false, //删除文章Modal
     visible1: false, //提交审核Modal
     visible: false,// Modal 是否显示
+    visible_2: false,
+    visible_3: false, // 审核通过 非公开文章
+    visible_4: false, // 审核未通过 公开文章
     actions: [
       {
         name: '预览'
@@ -31,6 +40,48 @@ Page({
       },
       {
         name: '提交审核'
+      }
+    ],
+    actions2: [
+      {
+        name: '预览'
+      },
+      {
+        name: '编辑'
+      },
+      {
+        name: '删除'
+      },
+      {
+        name: '撤销审核'
+      }
+    ],
+    actions3: [
+      {
+        name: '预览'
+      },
+      {
+        name: '编辑'
+      },
+      {
+        name: '删除'
+      },
+      {
+        name: '设为公开文章'
+      }
+    ],
+    actions4: [
+      {
+        name: '预览'
+      },
+      {
+        name: '编辑'
+      },
+      {
+        name: '删除'
+      },
+      {
+        name: '设为私密文章'
       }
     ]
   },
@@ -145,19 +196,23 @@ Page({
    * 操作点击事件
    */
   clickOp: function (e) {
-    console.log("click event ", e.currentTarget.dataset.id);
-    var that = this;
-    if (that.data.cid == e.currentTarget.dataset.id) {
-      that.setData({
-        // showView: (!that.data.showView)
-        cid: 0
-      })
-    } else {
-      that.setData({
-        // showView: (!that.data.showView)
-        cid: e.currentTarget.dataset.id
-      })
-    }
+    console.log("click event ", e.currentTarget.dataset);
+    this.setData({
+      cid: e.currentTarget.dataset.id,
+      status: e.currentTarget.dataset.status
+    })
+    // var that = this;
+    // if (that.data.cid == e.currentTarget.dataset.id) {
+    //   that.setData({
+    //     // showView: (!that.data.showView)
+    //     cid: 0
+    //   })
+    // } else {
+    //   that.setData({
+    //     // showView: (!that.data.showView)
+    //     cid: e.currentTarget.dataset.id
+    //   })
+    // }
   },
 
   /**
@@ -166,27 +221,59 @@ Page({
   clickItem: function (e) {
     var that = this;
     this.setData({
-      cid: e.currentTarget.dataset.id
+      cid: e.currentTarget.dataset.id,
+      status: e.currentTarget.dataset.status,
+      isPrivate: e.currentTarget.dataset.isprivate
     })
-    new Promise(function (resolve, reject) {
-      wx.request({
-        url: app.globalData.url + "/article/v1/getArticleStatus/" + that.data.cid,
-        method: "GET",
-        success: res => {
-          console.log("获取当前文章状态", res);
-          if (res.data.code == 200) {
-            resolve(res.data.data.status);
-          }
-        }
-      })
-    }).then(function (e) {
-      console.log("--------- status-------------", e);
-      console.log("------------actions--------", that.data.actions)
-      that.data.actions;
+    console.log("click item event ", e.currentTarget.dataset);
+    // new Promise(function (resolve, reject) {
+    //   wx.request({
+    //     url: app.globalData.url + "/article/v1/getArticleStatus/" + that.data.cid,
+    //     method: "GET",
+    //     success: res => {
+    //       console.log("获取当前文章状态", res);
+    //       if (res.data.code == 200) {
+    //         resolve(res.data.data.status);
+    //       }
+    //     }
+    //   })
+    // }).then(function (e) {
+    //   console.log("--------- status-------------", e);
+    //   console.log("------------actions--------", that.data.actions)
+    //   let actions = that.data.actions;
+    //   // if(e == 1) {
+    //   //  actions.splice(3, 1, "撤销审核");
+    //   // }
+    //   that.setData({
+    //     visible: true,
+    //     actions: actions
+    //   });
+    // })
+    
+    //未审核 审核未通过
+    if (that.data.status == 0 || that.data.status == 3) {
       that.setData({
         visible: true
       });
-    })
+    }
+    // 审核中
+    if (that.data.status == 1) {
+      that.setData({
+        visible_2: true
+      });
+    }
+    // 审核已通过
+    if (that.data.status == 2) {
+      if(that.data.isPrivate) {
+        that.setData({
+          visible_3: true
+        });
+      } else {
+        that.setData({
+          visible_4: true
+        });
+      }
+    }
 
   },
 
@@ -196,6 +283,7 @@ Page({
   handleClick: function (e) {
     console.log("Modal 返回值 ", e);
     const op = e.detail.index;
+    const flag = e.currentTarget.dataset.flag;
     // 预览
     if (op == 0) {
       wx.navigateTo({
@@ -213,11 +301,38 @@ Page({
       })
     }
     //提交审核
-    if (op == 3) {
-      this.setData({
-        visible1: true
-      })
+    if (flag == "sheet1") {
+      if (op == 3) {
+        this.setData({
+          visible1: true
+        })
+      }
     }
+    //撤销审核
+    if (flag == "sheet2") {
+      if (op == 3) {
+        this.setData({
+          visible3: true
+        })
+      }
+    }
+    //设置成公开文章
+    if (flag == "sheet3") {
+      if (op == 3) {
+        this.setData({
+          visible4: true
+        })
+      }
+    }
+    //设置成私密文章
+    if (flag == "sheet4") {
+      if (op == 3) {
+        this.setData({
+          visible5: true
+        })
+      }
+    }
+
     //取消Modal
     if (op == 4) {
       this.setData({
@@ -255,9 +370,9 @@ Page({
       method: "DELETE",
       success: res => {
         if (res.data.code == 200) {
-          wx.showToast({
-            title: '删除成功',
-            icon: 'success'
+          $Message({
+            content: '删除成功',
+            type: 'success'
           });
           this.setData({
             visible: false,
@@ -266,17 +381,17 @@ Page({
           that.onLoad();
         }
         if (res.data.code == 500) {
-          wx.showToast({
-            title: '网络异常，请稍后重试',
-            icon: 'none'
-          })
+          $Message({
+            content: "网络异常，请稍后再试",
+            type: 'error'
+          });
         }
       },
       fail: res => {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none'
-        })
+        $Message({
+          content: "网络异常，请稍后再试",
+          type: 'error'
+        });
       }
     })
   },
@@ -299,9 +414,35 @@ Page({
     })
   },
 
+  /**
+   * 关闭撤销审核Modal
+   */
+  handleClose3: function (e) {
+    this.setData({
+      visible3: false
+    })
+  },
+
+  //关闭设置公开
+  handleClose4: function (e) {
+    this.setData({
+      visible4: false
+    })
+  },
+
+  //设置成私密
+  handleClose5: function (e) {
+    this.setData({
+      visible5: false
+    })
+  },
+
   handleClose: function (e) {
     this.setData({
-      visible: false
+      visible: false,
+      visible_2: false,
+      visible_3: false,
+      visible_4: false
     })
   },
 
@@ -319,9 +460,13 @@ Page({
       success: res => {
         console.log("---------->", res);
         if (res.data.code == 200) {
-          wx.showToast({
-            title: "提交成功",
-            icon: "success"
+          // wx.showToast({
+          //   title: "提交成功",
+          //   icon: "success"
+          // });
+          $Message({
+            content: '提交审核成功',
+            type: 'success'
           });
           this.setData({
             visible: false,
@@ -330,9 +475,9 @@ Page({
           that.onLoad();
         }
         if (res.data.code == 500) {
-          wx.showToast({
-            title: res.data.msg,
-            icon: "none"
+          $Message({
+            content: res.data.msg,
+            type: 'error'
           });
           this.setData({
             visible1: false
@@ -340,10 +485,120 @@ Page({
         }
       },
       fail: res => {
-        wx.showToast({
-          title: "网络异常，请稍后再试",
-          icon: "none"
-        })
+        $Message({
+          content: "网络异常，请稍后再试",
+          type: 'error'
+        });
+      }
+    })
+  },
+
+  /**
+   * 撤销文章审核
+   */
+  handleSubmit2: function(e) {
+    var that = this;
+    wx.showLoading({
+      title: '提交中'
+    });
+
+    wx.request({
+      url: app.globalData.url + "/article/v1/repealCheck/" + that.data.cid,
+      method: "PUT",
+      success: res => {
+        if (res.data.code == 200) {
+          $Message({
+            content: '撤销审核成功',
+            type: 'success'
+          });
+          this.setData({
+            visible_2: false,
+            visible3: false
+          });
+          that.onLoad();
+        }
+        if (res.data.code == 500) {
+          // wx.showToast({
+          //   title: res.data.msg,
+          //   icon: "none"
+          // });
+          $Message({
+            content: res.data.msg,
+            type: 'error'
+          });
+          this.setData({
+            visible3: false
+          })
+        }
+      },
+      fail: res => {
+        $Message({
+          content: "网络异常，请稍后再试",
+          type: 'error'
+        });
+      }
+    })
+  },
+
+  /**
+   * 设置文章公开
+   */
+  handleSubmit3: function (e) {
+    this.setIsPrivate(0);
+  },
+
+  /**
+   * 设置文章私密
+   */
+  handleSubmit4: function (e) {
+    this.setIsPrivate(1);
+  },
+
+  /**
+   * 设置文章私有
+   */
+  setIsPrivate: function(e) {
+    var that = this;
+    wx.showLoading({
+      title: '提交中'
+    });
+
+    wx.request({
+      url: app.globalData.url + "/article/v1/setIsPrivate/" + that.data.cid + "/" + e,
+      method: "PUT",
+      success: res => {
+        if (res.data.code == 200) {
+          $Message({
+            content: '设置成功',
+            type: 'success'
+          });
+          this.setData({
+            visible_3: false,
+            visible4: false,
+            visible_4: false,
+            visible5: false
+          });
+          that.onLoad();
+        }
+        if (res.data.code == 500) {
+          // wx.showToast({
+          //   title: res.data.msg,
+          //   icon: "none"
+          // });
+          $Message({
+            content: res.data.msg,
+            type: 'error'
+          });
+          this.setData({
+            visible3: false
+          })
+        }
+      },
+      fail: res => {
+        $Message({
+          content: "网络异常，请稍后再试",
+          type: 'error'
+        });
       }
     })
   },

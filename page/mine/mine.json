@@ -6,6 +6,8 @@
     "i-row": "../../dist/row/index",
     "i-col": "../../dist/col/index",
     "i-modal": "../../dist/modal/index",
-    "i-action-sheet": "../../dist/action-sheet/index"
+    "i-action-sheet": "../../dist/action-sheet/index",
+    "i-message": "../../dist/message/index",
+    "i-tag": "../../dist/tag/index"
   }
 }
