@@ -28,24 +28,6 @@
   overflow: hidden;
 }
 
-.page-neck {
-  /* display: flex;
-  justify-content: space-between; */
-  color: #A8A8A8;
-  font-size: 27rpx;
-  /* height: 50rpx; */
-  height: 50rpx;
-  line-height: 50rpx;
-}
-
-.page-neck-num {
-  margin-left: 20rpx;
-}
-
-.page-neck-navi {
-  margin-right: 20rpx;
-}
-
 .page-body {
   height: 100%;
 }
@@ -150,4 +132,13 @@
   display: flex;
   height: 100%;
   width: 100%;
+}
+
+.col-class {
+  border-top: 1rpx solid rgb(230, 223, 223);
+  height: 50rpx;
+  background-color: white;
+  color: black;
+  font-size: 25rpx;
+  font-family: sans-serif;
 }
