@@ -12,7 +12,8 @@ Page({
     winHeight: 0,
     // tab切换
     currentTab: 0,
-    articleNum: 0, //文章数量
+    privateNum: 0, //文章数量
+    openNum: 0,
     list: [],
     status: 0,
     showView: false,
@@ -131,8 +132,37 @@ Page({
         console.log("我的文章列表返回数据 ----> ", res);
         if (res.data.code == 200) {
           that.setData({
-            list: res.data.data.records,
-            articleNum: res.data.data.total
+            list: res.data.data.records
+          })
+        }
+        if (res.data.code == 500) {
+          wx.showToast({
+            title: '网络异常，请稍后重试',
+            icon: 'none'
+          })
+        }
+        
+      },
+      fail: res => {
+        wx.showToast({
+          title: '网络异常，请稍后重试',
+          icon: 'none'
+        })
+      }
+    })
+
+    /**
+     * 获取文章数量
+     */
+    wx.request({
+      url: app.globalData.url + '/article/v1/getArticleCount/' + app.globalData.user.userId,
+      method: "GET",
+      success: res => {
+        console.log("获取到文章数量", res);
+        if (res.data.code == 200) {
+          that.setData({
+            privateNum: res.data.data.privateNum,
+            openNum: res.data.data.openNum
           })
         }
         if (res.data.code == 500) {

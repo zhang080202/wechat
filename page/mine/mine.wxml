@@ -1,21 +1,20 @@
 <view class="swiper-tab">
-  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">私密文章</view>
-  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">公开文章</view>
+  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">私密文章({{privateNum}})</view>
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">公开文章({{openNum}})</view>
 </view>
 
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
   <swiper-item>
     <view class="page-neck">
-      <i-row i-class="col-class">
+      <!-- <i-row i-class="col-class">
         <i-col span="8" offset="1">
-          文章数量 : {{articleNum}}
         </i-col>
         <i-col span="2" offset="12">
           <navigator url='list/list'>
             <i-icon type="add" size="28" color="#80848f" />
           </navigator>
         </i-col>
-      </i-row>
+      </i-row> -->
       <i-row i-class="col-class">
         <i-col span="7" offset="1">
           按文章类型
