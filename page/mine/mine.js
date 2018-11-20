@@ -29,6 +29,8 @@ Page({
     visible_2: false,
     visible_3: false, // 审核通过 非公开文章
     visible_4: false, // 审核未通过 公开文章
+    showtype: false, //显示文字类型下拉框
+    arrows: "packup", // 箭头
     actions: [
       {
         name: '预览'
@@ -198,6 +200,7 @@ Page({
       //公开文章
       this.getArticlerList(0);
     }
+    this.hidenNeck();
   },
   /**
    * 点击tab切换
@@ -220,6 +223,7 @@ Page({
       //公开文章
       this.getArticlerList(0);
     }
+    this.hidenNeck();
   },
 
   /**
@@ -638,6 +642,41 @@ Page({
    */
   handleSubmit1: function (e) {
     this.deleteArticle();
+  },
+  
+  /**
+   * 显示文字类型
+   */
+  showType: function(e) {
+    this.setData({
+      showtype: !this.data.showtype
+    })
+    if (this.data.showtype) {
+      this.setData({
+        arrows: "unfold"
+      })
+    } else {
+      this.setData({
+        arrows: "packup"
+      })
+    }
+  },
+  /**
+   * 点击其它位置也能关闭下拉框
+   */
+  hidenNeck: function(e) {
+    this.setData({
+      showtype: false
+    })
+    if (this.data.showtype) {
+      this.setData({
+        arrows: "unfold"
+      })
+    } else {
+      this.setData({
+        arrows: "packup"
+      })
+    }
   },
 
   /**

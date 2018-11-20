@@ -137,8 +137,43 @@
 .col-class {
   border-top: 1rpx solid rgb(230, 223, 223);
   height: 50rpx;
+  line-height: 50rpx;
   background-color: white;
   color: black;
   font-size: 25rpx;
   font-family: sans-serif;
+}
+
+.page-neck-irow {
+  border-top: 1rpx solid rgb(238, 232, 232);
+  border-bottom: 1rpx solid rgb(238, 232, 232);
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+.page-neck-type {
+  /* display: none; */
+  z-index: -1;
+  position: absolute;
+  background-color: white;
+  font-size: 25rpx;
+  font-family: sans-serif;
+  opacity: 0;
+  transition: opacity 0.3s linear;
+}
+.showType {
+  z-index: 100;
+  opacity: 1;
+  /* display: block; */
+  transition: opacity 0.3s linear;
+}
+.showTypeColor {
+  color: #0099CC;
+}
+.page-neck-status {
+  display: none;
+  /* height: 50rpx; */
+  z-index: 100;
+  position: absolute;
+  background-color: red;
 }

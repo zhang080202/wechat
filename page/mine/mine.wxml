@@ -16,18 +16,41 @@
         </i-col>
       </i-row> -->
       <i-row i-class="col-class">
-        <i-col span="7" offset="1">
+        <i-col span="7" offset="1" bindtap="showType" i-class="{{showtype ? 'showTypeColor' : ''}}">
           按文章类型
+          <i-icon type="{{arrows}}" size="15" color="#80848f" />
         </i-col>
         <i-col span="7" offset="1">
           按文章状态
+          <i-icon type="packup" size="15" color="#80848f" />
         </i-col>
         <i-col span="7" offset="1">
           按发布时间
+          <i-icon type="packup" size="15" color="#80848f" />
         </i-col>
       </i-row>
+      <view class="page-neck-type {{showtype ? 'showType' : ''}}" style="width:{{winWidth}}px">
+        <i-row i-class="page-neck-irow">
+          <i-col span="20" offset="1" class="">14712741</i-col>
+        </i-row>
+        <i-row i-class="page-neck-irow">
+          <i-col span="20" offset="1" class="">1471212741aaa</i-col>
+        </i-row>
+      </view>
+      <view class="page-neck-status" style="width:{{winWidth}}px">
+        <i-row i-class="page-neck-irow">
+          <i-col span="20" offset="1" class="">14712741</i-col>
+        </i-row>
+        <i-row i-class="page-neck-irow">
+          <i-col span="20" offset="1" class="">1471212741aaa</i-col>
+        </i-row>
+        <i-row i-class="page-neck-irow">
+          <i-col span="20" offset="1" class="">1471212741aaa231231</i-col>
+        </i-row>
+      </view>
+
     </view>
-    <scroll-view class='page-body' scroll-y='true' enable-back-to-top='true' scroll-with-animation='true'>
+    <scroll-view class='page-body' scroll-y='true' enable-back-to-top='true' scroll-with-animation='true' bindtap="hidenNeck">
       <block wx:for='{{list}}'>
         <view class='page-body-item' bindtap="clickItem" data-id='{{item.articleId}}' data-status="{{item.status}}" data-isPrivate='{{item.isPrivate}}'>
           <!-- <navigator class='page-body-item-navigator' url='../arcticle/detail/detail?articleId={{item.articleId}}'> -->
@@ -107,19 +130,19 @@
 <i-action-sheet visible="{{ visible_4 }}" actions="{{ actions4 }}" show-cancel bind:cancel="handleClose" bind:click="handleClick" data-flag="sheet4" />
 
 <i-modal title="温馨提示" visible="{{ visible1 }}" bind:ok="handleSubmit" bind:cancel="handleClose1">
-    <view>审核将在24小时内完成，请耐心等待</view>
-    <view>审核通过后即可将文章公开</view>
+  <view>审核将在24小时内完成，请耐心等待</view>
+  <view>审核通过后即可将文章公开</view>
 </i-modal>
 <i-modal title="温馨提示" visible="{{ visible2 }}" bind:ok="handleSubmit1" bind:cancel="handleClose2">
-    <view>确定要删除该文章吗？</view>
+  <view>确定要删除该文章吗？</view>
 </i-modal>
 <i-modal title="温馨提示" visible="{{ visible3 }}" bind:ok="handleSubmit2" bind:cancel="handleClose3">
-    <view>确定要撤销审核吗？</view>
+  <view>确定要撤销审核吗？</view>
 </i-modal>
 <i-modal title="温馨提示" visible="{{ visible4 }}" bind:ok="handleSubmit3" bind:cancel="handleClose4">
-    <view>文章设置公开将对所有用户可见</view>
+  <view>文章设置公开将对所有用户可见</view>
 </i-modal>
 <i-modal title="温馨提示" visible="{{ visible5 }}" bind:ok="handleSubmit4" bind:cancel="handleClose5">
-    <view>文章设置私密后仅自己可见</view>
+  <view>文章设置私密后仅自己可见</view>
 </i-modal>
 <i-message id="message" />
