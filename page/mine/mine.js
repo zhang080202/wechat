@@ -30,7 +30,10 @@ Page({
     visible_3: false, // 审核通过 非公开文章
     visible_4: false, // 审核未通过 公开文章
     showtype: false, //显示文字类型下拉框
-    arrows: "packup", // 箭头
+    showstatus: false, // 显示文章状态下拉框
+    arrows: "unfold", // 文章类型箭头
+    arrows1: "unfold", // 文章状态箭头
+    types: [],
     actions: [
       {
         name: '预览'
@@ -111,10 +114,10 @@ Page({
 
     if (that.data.currentTab == 0) {
       //私密文章
-      this.getArticlerList(1);
+      this.getArticlerList(1,null);
     } else if (that.data.currentTab == 1) {
       //公开文章
-      this.getArticlerList(0);
+      this.getArticlerList(0,null);
     }
   },
 
@@ -122,6 +125,7 @@ Page({
    * 获取文章列表
    */
   getArticlerList: function (e) {
+    console.log("-----> list", e);
     var that = this;
     wx.showLoading({
       title: '加载中',
@@ -648,16 +652,44 @@ Page({
    * 显示文字类型
    */
   showType: function(e) {
+    const that = this;
+    wx.request({
+      url: app.globalData.url + '/dict/v1/getDictByKey/article_type_',
+      method: "GET",
+      success: res => {
+        console.log("请求下拉列表返回数据==>", res);
+        that.setData({
+          types: res.data.data.result
+        });
+      }
+    })
     this.setData({
       showtype: !this.data.showtype
     })
     if (this.data.showtype) {
       this.setData({
-        arrows: "unfold"
+        arrows: "packup"
       })
     } else {
       this.setData({
-        arrows: "packup"
+        arrows: "unfold"
+      })
+    }
+  },
+  /**
+   * 显示文章状态
+   */
+  showStatus: function(e) {
+    this.setData({
+      showstatus: !this.data.showstatus
+    })
+    if (this.data.showstatus) {
+      this.setData({
+        arrows1: "packup"
+      })
+    } else {
+      this.setData({
+        arrows1: "unfold"
       })
     }
   },
@@ -670,13 +702,20 @@ Page({
     })
     if (this.data.showtype) {
       this.setData({
-        arrows: "unfold"
+        arrows: "packup"
       })
     } else {
       this.setData({
-        arrows: "packup"
+        arrows: "unfold"
       })
     }
+  },
+
+  /**
+   * 点击文字类型
+   */
+  clickType: function(e) {
+    console.log("-----type-----", e);
   },
 
   /**

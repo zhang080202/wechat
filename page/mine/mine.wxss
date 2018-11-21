@@ -167,13 +167,18 @@
   /* display: block; */
   transition: opacity 0.3s linear;
 }
-.showTypeColor {
+.showColor {
   color: #0099CC;
 }
-.page-neck-status {
+/* .page-neck-status {
   display: none;
-  /* height: 50rpx; */
   z-index: 100;
   position: absolute;
   background-color: red;
+} */
+.showStatus {
+   z-index: 100;
+  opacity: 1;
+  /* display: block; */
+  transition: opacity 0.3s linear;
 }
