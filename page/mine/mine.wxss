@@ -182,3 +182,22 @@
   /* display: block; */
   transition: opacity 0.3s linear;
 }
+.showTime {
+   z-index: 100;
+  opacity: 1;
+  /* display: block; */
+  transition: opacity 0.3s linear;
+}
+.icon_add {
+  width: 60px;
+  height: 60px;
+  /* margin: 20rpx; */
+  border-radius: 50%;
+  background-color: #0099CC;
+  position: fixed;
+  bottom: 10rpx;
+  left: 50%;
+  transform: translateX(-30px);
+  text-align: center;
+  line-height: 60px;
+}

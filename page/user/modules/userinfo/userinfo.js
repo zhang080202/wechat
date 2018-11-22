@@ -57,19 +57,19 @@ Page({
           data: that.data.user,
           success: res => {
             if(res.data.code == 500) {
-              wx.showToast({
-                title: res.data.msg,
-                icon: 'none'
-              })
+              $Message({
+                content: res.data.msg,
+                type: 'error'
+              });
               setTimeout(function () {
                 wx.hideToast();
               }, 1000);
             }
             if(res.data.code == 200) {
-              wx.showToast({
-                title: res.data.msg,
-                icon: 'success'
-              })
+              $Message({
+                content: '保存成功',
+                type: 'success'
+              });
               setTimeout(function () {
                 wx.hideToast();
               }, 1000);
@@ -78,6 +78,12 @@ Page({
                 delta: 1
               })
             }
+          },
+          fail: res => {
+            $Message({
+              content: "网络异常，请稍后再试",
+              type: 'error'
+            });
           }
         })
       }

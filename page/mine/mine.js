@@ -31,8 +31,13 @@ Page({
     visible_4: false, // 审核未通过 公开文章
     showtype: false, //显示文字类型下拉框
     showstatus: false, // 显示文章状态下拉框
+    showtime: false, //显示 时间下拉框
     arrows: "unfold", // 文章类型箭头
     arrows1: "unfold", // 文章状态箭头
+    arrows2: "unfold", // 时间排序箭头
+    articleType: -1, // 文章类型
+    articleStatus: -1, //文章状态
+    isDesc: false, //时间排序
     types: [],
     actions: [
       {
@@ -114,10 +119,10 @@ Page({
 
     if (that.data.currentTab == 0) {
       //私密文章
-      this.getArticlerList(1,null);
+      this.getArticlerList(1);
     } else if (that.data.currentTab == 1) {
       //公开文章
-      this.getArticlerList(0,null);
+      this.getArticlerList(0);
     }
   },
 
@@ -125,15 +130,23 @@ Page({
    * 获取文章列表
    */
   getArticlerList: function (e) {
-    console.log("-----> list", e);
     var that = this;
     wx.showLoading({
       title: '加载中',
     })
     //获取文章列表数据
     wx.request({
-      url: app.globalData.url + '/article/v1/getArticlerListByUser/' + 1 + '/' + 10 + "/" + e + "/" + app.globalData.user.userId,
+      url: app.globalData.url + '/article/v1/getArticlerListByUser',
       method: 'GET',
+      data: {
+        "page": 1,
+        "pageSize": 10,
+        "isPrivate": e,
+        "userId": app.globalData.user.userId,
+        "type": that.data.articleType,
+        "status": that.data.articleStatus,
+        "isDesc": that.data.isDesc
+      },
       success: res => {
         console.log("我的文章列表返回数据 ----> ", res);
         if (res.data.code == 200) {
@@ -161,8 +174,13 @@ Page({
      * 获取文章数量
      */
     wx.request({
-      url: app.globalData.url + '/article/v1/getArticleCount/' + app.globalData.user.userId,
+      url: app.globalData.url + '/article/v1/getArticleCount',
       method: "GET",
+      data: {
+        "userId": app.globalData.user.userId,
+        "type": that.data.articleType,
+        "status": that.data.articleStatus
+      },
       success: res => {
         console.log("获取到文章数量", res);
         if (res.data.code == 200) {
@@ -664,7 +682,9 @@ Page({
       }
     })
     this.setData({
-      showtype: !this.data.showtype
+      showtype: !this.data.showtype,
+      showstatus: false,
+      showtime: false
     })
     if (this.data.showtype) {
       this.setData({
@@ -681,7 +701,9 @@ Page({
    */
   showStatus: function(e) {
     this.setData({
-      showstatus: !this.data.showstatus
+      showstatus: !this.data.showstatus,
+      showtype: false,
+      showtime: false
     })
     if (this.data.showstatus) {
       this.setData({
@@ -693,20 +715,48 @@ Page({
       })
     }
   },
+
+
+  /**
+   * 点击时间排序
+   */
+  showTime: function(e) {
+    this.setData({
+      showtime: !this.data.showtime,
+      showstatus: false,
+      showtype: false
+    })
+    if (this.data.showtime) {
+      this.setData({
+        arrows2: "packup"
+      })
+    } else {
+      this.setData({
+        arrows2: "unfold"
+      })
+    }
+  },
+
   /**
    * 点击其它位置也能关闭下拉框
    */
   hidenNeck: function(e) {
     this.setData({
-      showtype: false
+      showtype: false,
+      showstatus: false,
+      showtime: false
     })
     if (this.data.showtype) {
       this.setData({
-        arrows: "packup"
+        arrows: "packup",
+        arrows1: "packup",
+        arrows2: "packup"
       })
     } else {
       this.setData({
-        arrows: "unfold"
+        arrows: "unfold",
+        arrows1: "unfold",
+        arrows2: "unfold"
       })
     }
   },
@@ -715,7 +765,33 @@ Page({
    * 点击文字类型
    */
   clickType: function(e) {
-    console.log("-----type-----", e);
+    this.setData({
+      articleType: e.currentTarget.dataset.dictid
+    })
+    this.onLoad();
+    this.hidenNeck();
+  },
+
+  /**
+   * 点击文章状态
+   */
+  clickStatus: function(e) {
+    this.setData({
+      articleStatus: e.currentTarget.dataset.status
+    })
+    this.onLoad();
+    this.hidenNeck();
+  },
+
+  /**
+   * 点击时间排序
+   */
+  clickTime: function(e) {
+    this.setData({
+      isDesc: e.currentTarget.dataset.isdesc
+    });
+    this.onLoad();
+    this.hidenNeck();
   },
 
   /**

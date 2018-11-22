@@ -24,12 +24,15 @@
           按文章状态
           <i-icon type="{{arrows1}}" size="15" color="#80848f" />
         </i-col>
-        <i-col span="7" offset="1">
+        <i-col span="7" offset="1" bindtap="showTime" i-class="{{showtime ? 'showColor' : ''}}">
           按发布时间
-          <i-icon type="unfold" size="15" color="#80848f" />
+          <i-icon type="{{arrows2}}" size="15" color="#80848f" />
         </i-col>
       </i-row>
       <view class="page-neck-type {{showtype ? 'showType' : ''}}" style="width:{{winWidth}}px">
+        <i-row i-class="page-neck-irow" bindtap="clickType" data-private="1" data-dictid="-1">
+          <i-col span="20" offset="1">全部</i-col>
+        </i-row>
         <block wx:for="{{types}}">
           <i-row i-class="page-neck-irow" bindtap="clickType" data-private="1" data-dictid="{{item.paramValue}}">
             <i-col span="20" offset="1">{{item.remark}}</i-col>
@@ -38,13 +41,28 @@
       </view>
       <view class="page-neck-type {{showstatus ? 'showStatus' : ''}}" style="width:{{winWidth}}px">
         <i-row i-class="page-neck-irow">
-          <i-col span="20" offset="1" class="">14712741</i-col>
+          <i-col span="20" offset="1" data-status="-1" bindtap="clickStatus">全部</i-col>
         </i-row>
         <i-row i-class="page-neck-irow">
-          <i-col span="20" offset="1" class="">1471212741aaa</i-col>
+          <i-col span="20" offset="1" data-status="0" bindtap="clickStatus">未审核</i-col>
         </i-row>
         <i-row i-class="page-neck-irow">
-          <i-col span="20" offset="1" class="">1471212741aaa231231</i-col>
+          <i-col span="20" offset="1" data-status="1" bindtap="clickStatus">审核中</i-col>
+        </i-row>
+        <i-row i-class="page-neck-irow">
+          <i-col span="20" offset="1" data-status="2" bindtap="clickStatus">已审核</i-col>
+        </i-row>
+        <i-row i-class="page-neck-irow">
+          <i-col span="20" offset="1" data-status="3" bindtap="clickStatus">未通过</i-col>
+        </i-row>
+      </view>
+
+      <view class="page-neck-type {{showtime ? 'showTime' : ''}}" style="width:{{winWidth}}px">
+        <i-row i-class="page-neck-irow">
+          <i-col span="20" offset="1" data-isDesc="0" bindtap="clickTime">按时间正序</i-col>
+        </i-row>
+        <i-row i-class="page-neck-irow">
+          <i-col span="20" offset="1" data-isDesc="1" bindtap="clickTime">按时间倒序</i-col>
         </i-row>
       </view>
 
@@ -98,17 +116,48 @@
   <swiper-item>
     <view class="page-neck">
       <i-row i-class="col-class">
-        <i-col span="8" offset="1">
-          <i-tag>文章数量 : {{articleNum}}</i-tag>
+        <i-col span="7" offset="1" bindtap="showType" i-class="{{showtype ? 'showColor' : ''}}">
+          按文章类型
+          <i-icon type="{{arrows}}" size="15" color="#80848f" />
         </i-col>
-        <i-col span="2" offset="12">
-          <navigator url='list/list'>
-            <i-icon type="add" size="28" color="#80848f" />
-          </navigator>
+        <i-col span="7" offset="1" bindtap="showStatus" i-class="{{showstatus ? 'showColor' : ''}}">
+          按文章状态
+          <i-icon type="{{arrows1}}" size="15" color="#80848f" />
+        </i-col>
+        <i-col span="7" offset="1" bindtap="showTime" i-class="{{showtime ? 'showColor' : ''}}">
+          按发布时间
+          <i-icon type="{{arrows2}}" size="15" color="#80848f" />
         </i-col>
       </i-row>
+      <view class="page-neck-type {{showtype ? 'showType' : ''}}" style="width:{{winWidth}}px">
+        <i-row i-class="page-neck-irow" bindtap="clickType" data-private="1" data-dictid="-1">
+          <i-col span="20" offset="1">全部</i-col>
+        </i-row>
+        <block wx:for="{{types}}">
+          <i-row i-class="page-neck-irow" bindtap="clickType" data-private="1" data-dictid="{{item.paramValue}}">
+            <i-col span="20" offset="1">{{item.remark}}</i-col>
+          </i-row>
+        </block>
+      </view>
+      <view class="page-neck-type {{showstatus ? 'showStatus' : ''}}" style="width:{{winWidth}}px">
+        <i-row i-class="page-neck-irow">
+          <i-col span="20" offset="1" data-status="-1" bindtap="clickStatus">全部</i-col>
+        </i-row>
+        <i-row i-class="page-neck-irow">
+          <i-col span="20" offset="1" data-status="2" bindtap="clickStatus">已审核</i-col>
+        </i-row>
+      </view>
+
+      <view class="page-neck-type {{showtime ? 'showTime' : ''}}" style="width:{{winWidth}}px">
+        <i-row i-class="page-neck-irow">
+          <i-col span="20" offset="1" data-isDesc="0" bindtap="clickTime">按时间正序</i-col>
+        </i-row>
+        <i-row i-class="page-neck-irow">
+          <i-col span="20" offset="1" data-isDesc="1" bindtap="clickTime">按时间倒序</i-col>
+        </i-row>
+      </view>
     </view>
-    <scroll-view class='page-body' scroll-y='true' enable-back-to-top='true' scroll-with-animation='true'>
+    <scroll-view class='page-body' scroll-y='true' enable-back-to-top='true' scroll-with-animation='true' bindtap="hidenNeck">
       <block wx:for='{{list}}'>
         <view class='page-body-item' bindtap="clickItem" data-id='{{item.articleId}}' data-status="{{item.status}}" data-isPrivate='{{item.isPrivate}}'>
           <!-- <navigator class='page-body-item-navigator' url='../arcticle/detail/detail?articleId={{item.articleId}}'> -->
@@ -145,3 +194,9 @@
   <view>文章设置私密后仅自己可见</view>
 </i-modal>
 <i-message id="message" />
+
+<navigator url='list/list'>
+  <view class='icon_add'>
+    <i-icon type='add' size="60" color="white" />
+  </view>
+</navigator>
