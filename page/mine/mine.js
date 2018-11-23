@@ -155,18 +155,18 @@ Page({
           })
         }
         if (res.data.code == 500) {
-          wx.showToast({
-            title: '网络异常，请稍后重试',
-            icon: 'none'
-          })
+          $Message({
+            content: "网络异常，请稍后再试",
+            type: 'error'
+          });
         }
         
       },
       fail: res => {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none'
-        })
+        $Message({
+          content: "网络异常，请稍后再试",
+          type: 'error'
+        });
       }
     })
 
@@ -190,19 +190,19 @@ Page({
           })
         }
         if (res.data.code == 500) {
-          wx.showToast({
-            title: '网络异常，请稍后重试',
-            icon: 'none'
-          })
+          $Message({
+            content: "网络异常，请稍后再试",
+            type: 'error'
+          });
         }
         //请求完成关闭 loading
         wx.hideLoading();
       },
       fail: res => {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none'
-        })
+        $Message({
+          content: "网络异常，请稍后再试",
+          type: 'error'
+        });
       }
     })
   },

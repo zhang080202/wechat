@@ -45,20 +45,26 @@ Page({
       data: that.data.article,
       success: res => {
         if (res.data.code == 200) {
-          wx.showToast({
-            "title": '上传成功',
-            "icon": 'success'
+          $Message({
+            content: '上传成功',
+            type: 'success'
           });
           wx.navigateBack({
             delta: 1
           })
         }
         if (res.data.code == 500) {
-          wx.showToast({
-            "title": res.data.msg,
-            "icon": 'none'
-          })
+          $Message({
+            content: res.data.msg,
+            type: 'error'
+          });
         }
+      },
+      fail: res => {
+        $Message({
+          content: "网络异常，请稍后再试",
+          type: 'error'
+        });
       }
     })
   },

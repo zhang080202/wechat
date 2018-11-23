@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "xing-editor": "../../common/editor/xing-editor"
+    "xing-editor": "../../common/editor/xing-editor",
+    "i-message": "../../../dist/message/index"
   },
   "navigationBarTitleText": "编辑文章"
 }
