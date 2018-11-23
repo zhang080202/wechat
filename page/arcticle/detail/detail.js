@@ -1,5 +1,5 @@
 const app = getApp();
-
+const regeneratorRuntime = require('../../../utils/runtime.js')
 Page({
 
   /**

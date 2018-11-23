@@ -13,7 +13,7 @@
   font-size: 30rpx;
   display: inline-block;
   width: 50%;
-  color: #777;
+  color: rgb(168, 162, 162);
 }
 
 .on {
@@ -162,7 +162,7 @@
   height: 50rpx;
   line-height: 50rpx;
   background-color: white;
-  color: black;
+  color: rgb(150, 146, 146);
   font-size: 25rpx;
   font-family: sans-serif;
 }

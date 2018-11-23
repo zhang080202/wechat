@@ -1,6 +1,7 @@
 // page/mine/mine.js
 const app = getApp();
 const { $Message } = require('../../../dist/base/index');
+const regeneratorRuntime = require('../../../utils/runtime.js')
 
 Page({
 
