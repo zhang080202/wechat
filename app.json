@@ -15,26 +15,26 @@
   },
   "tabBar": {
     "color": "#7A7E83",
-    "selectedColor": "#0099CC",
+    "selectedColor": "black",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
       {
         "pagePath": "page/arcticle/arcticle",
-        "iconPath": "image/imgs/icon_home_normal@3x.png",
-        "selectedIconPath": "image/imgs/icon_home_highlight@3x.png",
+        "iconPath": "image/homepage.png",
+        "selectedIconPath": "image/homepage_fill.png",
         "text": "首页"
       },
       {
         "pagePath": "page/mine/mine",
-        "iconPath": "image/imgs/icon_indent_normal@3x.png",
-        "selectedIconPath": "image/imgs/icon_indent_highlight@3x.png",
+        "iconPath": "image/document.png",
+        "selectedIconPath": "image/document_fill.png",
         "text": "我的文章"
       },
       {
         "pagePath": "page/user/user",
-        "iconPath": "image/imgs/icon_my_normal@3x.png",
-        "selectedIconPath": "image/imgs/icon_my_highlight@3x.png",
+        "iconPath": "image/people.png",
+        "selectedIconPath": "image/people_fill.png",
         "text": "个人中心"
       }
     ]

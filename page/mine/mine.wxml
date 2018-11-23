@@ -197,6 +197,6 @@
 
 <navigator url='list/list'>
   <view class='icon_add'>
-    <i-icon type='add' size="60" color="white" />
+    <i-icon type='add' size="50" color="white" />
   </view>
 </navigator>

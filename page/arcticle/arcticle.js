@@ -8,7 +8,7 @@ Page({
   data: {
     imgUrls: [],
     indicatorDots: true,
-    indicatorColor: '#66CCFF',
+    indicatorColor: 'black',
     autoplay: true,
     circular: true,
     interval: 4000,

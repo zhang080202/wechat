@@ -17,8 +17,8 @@
 }
 
 .on {
-  color: #09c;
-  border-bottom: 5rpx solid #09c;
+  color: black;
+  border-bottom: 5rpx solid black;
 }
 
 .swiper-box {
@@ -193,7 +193,7 @@
 }
 
 .showColor {
-  color: #09c;
+  color: black;
 }
 
 /* .page-neck-status {
@@ -218,15 +218,15 @@
 }
 
 .icon_add {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   /* margin: 20rpx; */
   border-radius: 50%;
-  background-color: #09c;
+  background-color: black;
   position: fixed;
   bottom: 10rpx;
   left: 50%;
-  transform: translateX(-30px);
+  transform: translateX(-25px);
   text-align: center;
-  line-height: 60px;
+  line-height: 50px;
 }
