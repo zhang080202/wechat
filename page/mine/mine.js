@@ -348,7 +348,9 @@ Page({
     }
     //编辑
     if (op == 1) {
-
+      wx.navigateTo({
+        url: 'list/list?articleId=' + this.data.cid,
+      })
     }
     //删除
     if (op == 2) {

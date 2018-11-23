@@ -1,5 +1,6 @@
 // page/mine/mine.js
 const app = getApp();
+const { $Message } = require('../../../dist/base/index');
 
 Page({
 
@@ -71,10 +72,10 @@ Page({
   //绑定文章标题输入框失去焦点事件
   bindBlur: function (e) {
     if (e.detail.value == null || e.detail.value == "") {
-      wx.showToast({
-        title: '文章标题不能为空',
-        icon: 'none'
-      })
+      $Message({
+        content: '文章标题不能为空',
+        type: 'warning'
+      });
     }
     this.setData({
       title: e.detail.value
@@ -91,10 +92,10 @@ Page({
   chooseImage: function (e) {
     var that = this;
     if (that.data.files.length >= 1) {
-      wx.showToast({
-        title: '标题图片最多上传1张',
-        icon: 'none'
-      })
+      $Message({
+        content: '标题图片最多上传1张',
+        type: 'warning'
+      });
       return;
     }
     wx.chooseImage({
@@ -115,9 +116,9 @@ Page({
           name: 'file',
           success: res => {
             wx.hideLoading();
-            wx.showToast({
-              title: '上传成功',
-              icon: 'success'
+            $Message({
+              content: '上传成功',
+              type: 'success'
             });
             console.log("上传图片 ", res);
             that.setData({
@@ -127,10 +128,10 @@ Page({
           },
           fail: res => {
             wx.hideLoading();
-            wx.showToast({
-              title: '网络异常，请稍后再试',
-              icon: 'none'
-            })
+            $Message({
+              content: '网络异常，请稍后再试',
+              type: 'error'
+            });
           }
         })
       }
@@ -157,14 +158,17 @@ Page({
             url: app.globalData.url + '/oss/v1/deleteImage/' + that.data.imageId,
             method: 'DELETE',
             success: res => {
-              console.log("删除成功", res);
-              wx.showToast({
-                title: '删除成功',
-                icon: 'success'
-              })
+              $Message({
+                content: '删除成功',
+                type: 'success'
+              });
             },
             fail: res => {
               console.log("删除标题图片失败", res);
+              $Message({
+                content: '网络异常，请稍后再试',
+                type: 'error'
+              });
               return;
             }
           })
@@ -205,28 +209,52 @@ Page({
   /**
    * 获取下拉框值
    */
-  loadSelecor: function () {
+  loadSelector () {
     const that = this;
-    wx.request({
-      url: app.globalData.url + '/dict/v1/getDictByKey/article_type_',
-      method: "GET",
-      success: res => {
-        console.log("请求下拉列表返回数据==>", res);
-        that.setData({
-          types: res.data.data.value,
-          index: res.data.data.key
-        });
-      }
+    return new Promise(resolve => {
+      wx.request({
+        url: app.globalData.url + '/dict/v1/getDictByKey/article_type_',
+        method: "GET",
+        success: res => {
+          that.setData({
+            types: res.data.data.value,
+            index: res.data.data.key
+          });
+          resolve();
+        }
+      })
     })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  async onLoad (options) {
+    var that = this;
     //加载下拉框
-    this.loadSelecor();
+    await that.loadSelector()
 
+    if (options.articleId) {
+      //根据文章ID 获取文章详细信息
+      wx.request({
+        url: app.globalData.url + '/article/v1/getArticlerById/' + options.articleId,
+        method: 'GET',
+        success: res => {
+          console.log(res);
+          that.setData({
+            title: res.data.data.title,
+            indexs: that.data.index.indexOf(res.data.data.articleType.toString())
+          })
+          wx.hideLoading();
+        },
+        fail: res => {
+          wx.showToast({
+            title: '网络异常，请稍后再试',
+            icon: 'none'
+          })
+        }
+      })
+    }
   },
 
   /**

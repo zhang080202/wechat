@@ -2,7 +2,7 @@
 <view class="weui-cells weui-cells_after-title">
   <view class="weui-cell weui-cell_input">
     <view class="weui-cell__bd">
-      <input class="weui-input" name="title" bindblur="bindBlur" placeholder="请输入您的文章标题" />
+      <input class="weui-input" name="title" bindblur="bindBlur" value="{{title}}" placeholder="请输入您的文章标题" />
     </view>
   </view>
 </view>
@@ -48,3 +48,4 @@
 
 <view class="weui-cells__title">文章内容</view>
 <xing-editor bindfinish="finish" output-type="html" image-upload-url="{{url}}" image-upload-name="{{filename}}" image-upload-key-chain="{{keyChain}}" html="{{html}}" />
+<i-message id="message" />
