@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    html: '<p class="xing-p">这里是文字信息，点击上方或下去左边的方框可添加文本域；点击右边方框可添加图片：</p><img class="xing-img" style="width: 100%" src="https://www.uooyoo.com/img2017/2/15/2017021560909533.jpg" _height="0.61983" _uploaded="true"></img>',
+    html: '',
     url: app.globalData.url + '/oss/v1/uploadFile',
     filename: 'file',
     keyChain: 'data.ossUrl',
@@ -233,7 +233,7 @@ Page({
   async onLoad (options) {
     var that = this;
     //加载下拉框
-    await that.loadSelector()
+    await that.loadSelector();
 
     if (options.articleId) {
       //根据文章ID 获取文章详细信息
@@ -244,8 +244,10 @@ Page({
           console.log(res);
           that.setData({
             title: res.data.data.title,
-            indexs: that.data.index.indexOf(res.data.data.articleType.toString())
+            indexs: that.data.index.indexOf(res.data.data.articleType.toString()),
+            html: res.data.data.content
           })
+          console.log(that.data.html);
           wx.hideLoading();
         },
         fail: res => {
@@ -254,6 +256,10 @@ Page({
             icon: 'none'
           })
         }
+      })
+    } else {
+      that.setData({
+        html:'<p class="xing-p">这里是文字信息，点击上方或下去左边的方框可添加文本域；点击右边方框可添加图片：</p><img class="xing-img" style="width: 100%" src="https://www.uooyoo.com/img2017/2/15/2017021560909533.jpg" _height="0.61983" _uploaded="true"></img>'
       })
     }
   },

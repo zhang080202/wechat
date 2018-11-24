@@ -47,5 +47,7 @@
 </view>
 
 <view class="weui-cells__title">文章内容</view>
-<xing-editor bindfinish="finish" output-type="html" image-upload-url="{{url}}" image-upload-name="{{filename}}" image-upload-key-chain="{{keyChain}}" html="{{html}}" />
+<block wx:if="{{html != ''}}">
+  <xing-editor bindfinish="finish" output-type="html" image-upload-url="{{url}}" image-upload-name="{{filename}}" image-upload-key-chain="{{keyChain}}" html="{{html}}" />
+</block>
 <i-message id="message" />

@@ -46,6 +46,38 @@ Component({
     nodeList: [],
     textBufferPool: [],
   },
+  
+  // ready: function () {
+  //   console.log("--->", this.properties.html);
+  //   const { windowHeight } = wx.getSystemInfoSync();
+  //   this.setData({
+  //     windowHeight,
+  //   })
+  //   if (this.properties.nodes && this.properties.nodes.length > 0) {
+  //     const textBufferPool = [];
+  //     this.properties.nodes.forEach((node, index) => {
+  //       if (node.name === 'p') {
+  //         textBufferPool[index] = node.children[0].text;
+  //       }
+  //     })
+  //     this.setData({
+  //       textBufferPool,
+  //       nodeList: this.properties.nodes,
+  //     })
+  //   } else if (this.properties.html) {
+  //     const nodeList = this.HTMLtoNodeList();
+  //     const textBufferPool = [];
+  //     nodeList.forEach((node, index) => {
+  //       if (node.name === 'p') {
+  //         textBufferPool[index] = node.children[0].text;
+  //       }
+  //     })
+  //     this.setData({
+  //       textBufferPool,
+  //       nodeList,
+  //     })
+  //   }
+  // },
 
   attached: function () {
     const { windowHeight } = wx.getSystemInfoSync();
