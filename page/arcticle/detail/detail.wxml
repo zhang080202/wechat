@@ -1,10 +1,26 @@
-<scroll-view class='page-body' scroll-y='true' class='container'>
+<!-- <import src="../../../wxParse/wxParse.wxml" /> -->
+<!-- <scroll-view class='container' scroll-y='true'>
   <view class='page-head'>
     <label class='page-head-title'>{{detail.title}}</label>
   </view>
   <view class='page-neck'>
-    <view class='page-neck-author'>作者：{{detail.createUser}}</view>
-    <view class='page-neck-time'>发布时间：{{detail.passTime}}</view>
+    <view class="i-divider-mart">
+      <i-divider content="作者：{{detail.username}}"></i-divider>
+    </view>
   </view>
-  <view class='page-body'>{{detail.content}}</view>
-</scroll-view>
+  <view class='page-body'>
+    <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+  </view>
+  <i-row i-class="col-class space">
+    <i-col span="24" i-class=""></i-col>
+  </i-row>
+  <view class='page-body_readNum'>
+    <i-row i-class="col-class">
+      <i-col span="7" offset="1" i-class="">阅读 {{detail.readNum}}</i-col>
+    </i-row>
+  </view>
+  <view class='page-foot'>
+    <i-load-more loading="{{ false }}" />
+  </view>
+</scroll-view> -->
+<i-load-more loading="{{false}}" />

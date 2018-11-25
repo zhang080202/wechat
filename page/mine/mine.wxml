@@ -163,6 +163,13 @@
           <!-- <navigator class='page-body-item-navigator' url='../arcticle/detail/detail?articleId={{item.articleId}}'> -->
           <i-row class="page-body-irow">
             <i-col span="16" offset="1" class="page-body-item-cnetent-label">{{item.title}}</i-col>
+            <i-col span="4" offset="2">
+              <view class='page-body-item-image'>
+                <block wx:if="{{item.status == 2}}">
+                  <view class="page-body-item-image-status_3">已审核</view>
+                </block>
+              </view>
+            </i-col>
           </i-row>
         </view>
       </block>

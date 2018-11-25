@@ -15,6 +15,7 @@ Page({
     keyChain: 'data.ossUrl',
     title: '', //文章标题
     articleType: 0, // 文章类型
+    articleId: '', //文章id
     image: '', // 标题图片
     imageId: '',
     types: [], // 文章类型
@@ -39,7 +40,8 @@ Page({
       'article.title': that.data.title,
       'article.articleType': that.data.articleType,
       'article.content': e.detail.content,
-      'article.image': that.data.imageId
+      'article.image': that.data.imageId,
+      'article.articleId': that.data.articleId
     })
     wx.request({
       url: app.globalData.url + '/article/v1/saveArticle',
@@ -245,9 +247,12 @@ Page({
           that.setData({
             title: res.data.data.title,
             indexs: that.data.index.indexOf(res.data.data.articleType.toString()),
-            html: res.data.data.content
+            html: res.data.data.content,
+            files: [res.data.data.accessImage],
+            imageId: res.data.data.image,
+            articleId: res.data.data.articleId,
+            articleType: res.data.data.articleType
           })
-          console.log(that.data.html);
           wx.hideLoading();
         },
         fail: res => {
@@ -258,6 +263,7 @@ Page({
         }
       })
     } else {
+      //新增文章 为html赋值
       that.setData({
         html:'<p class="xing-p">这里是文字信息，点击上方或下去左边的方框可添加文本域；点击右边方框可添加图片：</p><img class="xing-img" style="width: 100%" src="https://www.uooyoo.com/img2017/2/15/2017021560909533.jpg" _height="0.61983" _uploaded="true"></img>'
       })

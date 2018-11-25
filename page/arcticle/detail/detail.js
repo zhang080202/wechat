@@ -1,5 +1,7 @@
 const app = getApp();
 const regeneratorRuntime = require('../../../utils/runtime.js')
+var WxParse = require('../../../wxParse/wxParse.js');
+
 Page({
 
   /**
@@ -26,12 +28,15 @@ Page({
         that.setData({
           detail: res.data.data
         })
+        var article = res.data.data.content;
+        WxParse.wxParse('article', 'html', article, that, 5);
         wx.hideLoading();
       },
       fail: res => {
+        wx.hideLoading();
         wx.showToast({
-          title: '网络异常，请稍后再试',
-          icon: 'none'
+          title: "网络异常，请稍后再试",
+          icon: "none"
         })
       }
     })
