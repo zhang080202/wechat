@@ -1,10 +1,10 @@
-@import "../../../wxParse/wxParse.wxss";
+/* @import "../../../wxParse/wxParse.wxss"; */
 .container {
   height: 100%;
 }
-/* page {
+page {
   background-color: white;
-} */
+}
 /* 顶部标题 */
 .page-head {
   background-color: white;
@@ -68,6 +68,6 @@
 }
 
 .page-foot {
-  height: 20rpx;
-  margin-top: 10rpx;
+  background-color: #F8F8F8;
+  padding: 20rpx;
 }

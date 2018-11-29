@@ -43,7 +43,9 @@ Page({
       url: app.globalData.url + '/article/v1/getArticlerById/' + options.articleId + '/' + app.globalData.user.userId,
       method: 'GET',
       success: res => {
-        console.log(res);
+        var createTime = res.data.data.detail.createTime;
+        res.data.data.detail.createTime = createTime.substring(0,10);
+        console.log(res.data.data.detail);
         that.setData({
           detail: res.data.data.detail,
           praiseNum: res.data.data.detail.praiseNum,

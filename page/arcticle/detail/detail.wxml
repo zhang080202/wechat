@@ -5,7 +5,7 @@
   </view>
   <view class='page-neck'>
     <view class="i-divider-mart">
-      <i-divider content="作者：{{detail.username}}"></i-divider>
+      <i-divider content="作者：{{detail.username}}  发布时间：{{detail.createTime}}"></i-divider>
     </view>
   </view>
   <view class='page-body'>
@@ -22,7 +22,12 @@
       </i-col>
     </i-row>
   </view>
-  <!-- <view class="i-divider-mart">
-    <i-divider content="我们是有底线的"></i-divider>
-  </view> -->
+  <view class='page-foot'>
+  <i-row i-class="col-class">
+    <i-col span="4" offset="18" i-class="">
+      写留言
+    </i-col>
+  </i-row>
+  <!-- <i-load-more loading="{{ false }}" /> -->
+</view>
 </scroll-view>
