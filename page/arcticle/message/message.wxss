@@ -1,0 +1,13 @@
+textarea {
+    width: 700rpx;
+    padding: 25rpx 0;
+}
+.textarea-wrp {
+    padding: 0 25rpx;
+    background-color: #fff;
+}
+/* .save-button {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+} */

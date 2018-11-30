@@ -2,6 +2,7 @@
   "pages": [
     "page/arcticle/arcticle",
     "page/arcticle/detail/detail",
+    "page/arcticle/message/message",
     "page/user/user",
     "page/user/modules/userinfo/userinfo",
     "page/mine/mine",

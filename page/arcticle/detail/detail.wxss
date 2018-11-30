@@ -2,9 +2,9 @@
 .container {
   height: 100%;
 }
-page {
+/* page {
   background-color: white;
-}
+} */
 /* 顶部标题 */
 .page-head {
   background-color: white;
@@ -68,6 +68,8 @@ page {
 }
 
 .page-foot {
-  background-color: #F8F8F8;
+  /* background-color: #F8F8F8; */
   padding: 20rpx;
+  font: 24rpx;
+  color: rgb(106, 106, 179);
 }

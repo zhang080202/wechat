@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "写留言",
+  "usingComponents": {
+    "i-panel": "../../../dist/panel/index",
+    "i-button": "../../../dist/button/index",
+    "i-modal": "../../../dist/modal/index"
+  }
+}

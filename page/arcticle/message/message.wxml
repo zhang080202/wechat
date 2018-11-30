@@ -1,0 +1,23 @@
+<view class='container'>
+  <i-panel title="">
+    <view style="padding: 15px;">{{title}}</view>
+  </i-panel>
+
+  <!-- <view class="page-section">
+    <view class="textarea-wrp">
+      <textarea auto-focus="true" auto-height='true' maxlength="50" placeholder="请输入留言" style="height: 4.3em" />
+    </view>
+  </view> -->
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <textarea bindblur='blurHandle' class="weui-textarea" auto-focus='true' maxlength="50" placeholder="请输入留言" style="height: 4.3em" />
+      </view>
+    </view>
+  </view>
+  <i-button type="primary" bind:click="handleClick" >保存</i-button>
+</view>
+
+<i-modal title="温馨提示" visible="{{ visible }}" bind:ok="handleSubmit" bind:cancel="handleClose">
+  <view>确定要撤销审核吗？</view>
+</i-modal>
