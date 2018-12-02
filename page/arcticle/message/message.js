@@ -1,3 +1,4 @@
+const app = getApp();
 // page/arcticle/message/message.js
 Page({
 
@@ -39,7 +40,19 @@ Page({
    * 提交留言
    */
   handleSubmit (e) {
-    console.log("---------------------", this.data.text);
+    var that = this;
+    wx.request({
+      url: app.globalData.url + '/article/v1/saveMessage',
+      method: 'POST',
+      data: {
+        'message.articleId': that.data.articleId,
+        'message.userId': that.data.userId,
+        'message.content': that.data.text
+      },
+      success: res => {
+        console.log(res);
+      }
+    })
   },
 
   /**

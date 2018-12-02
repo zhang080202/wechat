@@ -19,5 +19,5 @@
 </view>
 
 <i-modal title="温馨提示" visible="{{ visible }}" bind:ok="handleSubmit" bind:cancel="handleClose">
-  <view>确定要撤销审核吗？</view>
+  <view>确定提交该留言吗？</view>
 </i-modal>
