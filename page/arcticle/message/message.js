@@ -1,5 +1,6 @@
 const app = getApp();
-// page/arcticle/message/message.js
+const { $Message } = require('../../../dist/base/index');
+
 Page({
 
   /**
@@ -42,15 +43,35 @@ Page({
   handleSubmit (e) {
     var that = this;
     wx.request({
-      url: app.globalData.url + '/article/v1/saveMessage',
+      url: app.globalData.url + '/message/v1/saveMessage',
       method: 'POST',
       data: {
-        'message.articleId': that.data.articleId,
-        'message.userId': that.data.userId,
-        'message.content': that.data.text
+        'articleId': that.data.articleId,
+        'userId': app.globalData.user.userId,
+        'msgContent': that.data.text
       },
       success: res => {
         console.log(res);
+        if(res.data.code == 200) {
+          that.handleClose();
+          $Message({
+            content: "保存留言成功",
+            type: 'success'
+          });
+          // wx.navigateBack({
+          //   delta: 1
+          // })
+          wx.navigateTo({
+            url: '../detail/detail?articleId=' + that.data.articleId
+          })
+        } else {
+          that.handleClose();
+          $Message({
+            content: res.data.msg,
+            type: 'error'
+          });
+        }
+
       }
     })
   },

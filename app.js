@@ -4,38 +4,43 @@ App({
     console.log('App Launch', opts)
 
     var that = this;
-    wx.getUserInfo({
-      success: res => {
-        console.log(res);
-        that.globalData.userInfo = res.userInfo;
-      },
-      fail: res => {
-        console.log('wx.getUserInfo is fail!!');
-      }
-    })
-    //登陆
-    wx.login({
-      success: res => {
-        if (res.code) {
-          wx.request({
-            url: that.globalData.url + '/user/v1/userLogin',
-            method: 'GET',
-            data: {
-              code: res.code,
-              userInfo: that.globalData.userInfo
-            },
-            success: ret => {              
-              that.globalData.user = ret.data.data;
-              if (that.globalData.userInfo != null) {
-                console.log('login success !!');
-                console.log('user ', that.globalData.user);
-                that.globalData.hasLogin = true;
-              }
-            }
-          })
+    new Promise(function (resolve, reject) {
+      wx.getUserInfo({
+        success: res => {
+          console.log(res);
+          that.globalData.userInfo = res.userInfo;
+          resolve(that.globalData.userInfo);
+        },
+        fail: res => {
+          console.log('wx.getUserInfo is fail!!');
         }
-      }
+      })
+    }).then(function (e) {
+      //登陆
+      wx.login({
+        success: res => {
+          if (res.code) {
+            wx.request({
+              url: that.globalData.url + '/user/v1/userLogin',
+              method: 'GET',
+              data: {
+                code: res.code,
+                userInfo: e
+              },
+              success: ret => {
+                that.globalData.user = ret.data.data;
+                if (that.globalData.userInfo != null) {
+                  console.log('login success !!');
+                  console.log('user ', that.globalData.user);
+                  that.globalData.hasLogin = true;
+                }
+              }
+            })
+          }
+        }
+      })
     })
+   
   },
   globalData: {
     hasLogin: false,

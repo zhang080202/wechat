@@ -30,6 +30,15 @@
         </i-col>
       </navigator>
     </i-row>
-    <!-- <i-load-more loading="{{ false }}" /> -->
+
+
   </view>
+  <block wx:for="{{message}}">
+    <i-card full title="{{item.username}}" thumb="{{item.avatarUrl}}" i-class="card-demo">
+      <view slot="content">{{item.msgContent}}</view>
+      <view slot="footer">{{item.createTime}}</view>
+    </i-card>
+  </block>
+  <i-load-more loading="{{ false }}" />
 </scroll-view>
+<i-message id="message" />

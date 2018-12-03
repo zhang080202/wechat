@@ -21,3 +21,5 @@
 <i-modal title="温馨提示" visible="{{ visible }}" bind:ok="handleSubmit" bind:cancel="handleClose">
   <view>确定提交该留言吗？</view>
 </i-modal>
+
+<i-message id="message" />

@@ -3,6 +3,7 @@
   "usingComponents": {
     "i-panel": "../../../dist/panel/index",
     "i-button": "../../../dist/button/index",
-    "i-modal": "../../../dist/modal/index"
+    "i-modal": "../../../dist/modal/index",
+    "i-message": "../../../dist/message/index"
   }
 }

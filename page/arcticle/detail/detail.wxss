@@ -73,3 +73,13 @@
   font: 24rpx;
   color: rgb(106, 106, 179);
 }
+
+.card-demo {
+  background-color: #F8F8F8;
+}
+
+.card-demo image {
+  border-radius: 50%;
+  width: 80rpx;
+  height: 80rpx;
+}

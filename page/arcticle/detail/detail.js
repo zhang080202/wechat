@@ -1,6 +1,7 @@
 const app = getApp();
 const regeneratorRuntime = require('../../../utils/runtime.js')
 var WxParse = require('../../../wxParse/wxParse.js');
+const { $Message } = require('../../../dist/base/index');
 
 Page({
 
@@ -10,7 +11,8 @@ Page({
   data: {
     detail: {},
     praise: "praise",
-    praiseNum: 0
+    praiseNum: 0,
+    message: []
   },
 
   /**
@@ -43,20 +45,53 @@ Page({
       url: app.globalData.url + '/article/v1/getArticlerById/' + options.articleId + '/' + app.globalData.user.userId,
       method: 'GET',
       success: res => {
-        var createTime = res.data.data.detail.createTime;
-        res.data.data.detail.createTime = createTime.substring(0,10);
-        console.log(res.data.data.detail);
-        that.setData({
-          detail: res.data.data.detail,
-          praiseNum: res.data.data.detail.praiseNum,
-        })
-        if (res.data.data.isPraise == 1) {
+        if(res.data.code == 200) {
+          var createTime = res.data.data.detail.createTime;
+          res.data.data.detail.createTime = createTime.substring(0, 10);
+          console.log(res.data.data.detail);
           that.setData({
-            praise: 'praise_fill'
+            detail: res.data.data.detail,
+            praiseNum: res.data.data.detail.praiseNum,
           })
+          if (res.data.data.isPraise == 1) {
+            that.setData({
+              praise: 'praise_fill'
+            })
+          }
+          var article = res.data.data.detail.content;
+          WxParse.wxParse('article', 'html', article, that, 5);
+        } else {
+          $Message({
+            content: "网络异常，请稍后再试",
+            type: 'error'
+          });
         }
-        var article = res.data.data.detail.content;
-        WxParse.wxParse('article', 'html', article, that, 5);
+      },
+      fail: res => {
+        wx.hideLoading();
+        $Message({
+          content: "网络异常，请稍后再试",
+          type: 'error'
+        });
+      }
+    })
+
+    //获取留言
+    wx.request({
+      url: app.globalData.url + '/message/v1/list/' + options.articleId,
+      method: 'GET',
+      success: res => {
+        console.log("留言 -------->", res);
+        if(res.data.code == 200) {
+          that.setData({
+            message: res.data.data.records
+          });
+        } else {
+          $Message({
+            content: "网络异常，请稍后再试",
+            type: 'error'
+          });
+        }
         wx.hideLoading();
       },
       fail: res => {
@@ -80,7 +115,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    
   },
 
   /**
