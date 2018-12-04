@@ -1,16 +1,15 @@
 <view class='container'>
-<scroll-view class='page-body' scroll-y='true' enable-back-to-top='true' scroll-with-animation='true'>
-  <view class='page-head'>
-    <swiper class='page-head-swiper' indicator-dots='{{indicatorDots}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}' indicator-active-color='{{indicatorColor}}'>
-      <block wx:for='{{imgUrls}}' wx:key='*this'>
-        <swiper-item>
-          <image class='page-head-image' src='{{item}}' mode='widthFix'></image>
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
-  
-  
+  <view class='page-body'>
+    <view class='page-head'>
+      <swiper class='page-head-swiper' indicator-dots='{{indicatorDots}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}' indicator-active-color='{{indicatorColor}}'>
+        <block wx:for='{{imgUrls}}' wx:key='*this'>
+          <swiper-item>
+            <image class='page-head-image' src='{{item}}' mode='widthFix'></image>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+
     <block wx:for='{{list}}'>
       <view class='page-body-item'>
         <navigator class='page-body-item-navigator' url='detail/detail?articleId={{item.articleId}}'>
@@ -21,9 +20,9 @@
             <view class='page-body-item-image'>
               <image class='page-body-image' src='{{item.accessImage}}' mode='scaleToFill'></image>
             </view>
-          </view>             
+          </view>
         </navigator>
       </view>
     </block>
-  </scroll-view>
+  </view>
 </view>

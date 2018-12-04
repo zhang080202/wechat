@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "我的文章",
   "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50,
   "usingComponents": {
     "i-icon": "../../dist/icon/index",
     "i-row": "../../dist/row/index",

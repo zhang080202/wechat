@@ -14,7 +14,9 @@ Page({
     interval: 4000,
     duration: 1000,
     title: '',
-    list: []
+    list: [],
+    page: 1,
+    pageSize: 10
   },
 
   /**
@@ -50,7 +52,7 @@ Page({
     })
     //获取文章列表数据
     wx.request({
-      url: app.globalData.url + '/article/v1/getArticlerList/' + 1 + '/' + 10 ,
+      url: app.globalData.url + '/article/v1/getArticlerList/' + that.data.page + '/' + that.data.pageSize ,
       method: 'GET',
       success: res => {  
         if(res.data.code == 200) {
@@ -108,14 +110,16 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.onLoad();
+    // 停止下拉动作
+    wx.stopPullDownRefresh();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    console.log("`1111")
   },
 
   /**

@@ -67,7 +67,7 @@
       </view>
 
     </view>
-    <scroll-view class='page-body' scroll-y='true' enable-back-to-top='true' scroll-with-animation='true' bindtap="hidenNeck">
+    <view class='page-body' bindtap="hidenNeck">
       <block wx:for='{{list}}'>
         <view class='page-body-item' bindtap="clickItem" data-id='{{item.articleId}}' data-status="{{item.status}}" data-isPrivate='{{item.isPrivate}}'>
           <!-- <navigator class='page-body-item-navigator' url='../arcticle/detail/detail?articleId={{item.articleId}}'> -->
@@ -111,7 +111,7 @@
           <!-- </navigator> -->
         </view>
       </block>
-    </scroll-view>
+    </view>
   </swiper-item>
   <swiper-item>
     <view class="page-neck">
@@ -157,7 +157,7 @@
         </i-row>
       </view>
     </view>
-    <scroll-view class='page-body' scroll-y='true' enable-back-to-top='true' scroll-with-animation='true' bindtap="hidenNeck">
+    <view class='page-body' bindtap="hidenNeck">
       <block wx:for='{{list}}'>
         <view class='page-body-item' bindtap="clickItem" data-id='{{item.articleId}}' data-status="{{item.status}}" data-isPrivate='{{item.isPrivate}}'>
           <!-- <navigator class='page-body-item-navigator' url='../arcticle/detail/detail?articleId={{item.articleId}}'> -->
@@ -173,7 +173,7 @@
           </i-row>
         </view>
       </block>
-    </scroll-view>
+    </view>
   </swiper-item>
 </swiper>
 
