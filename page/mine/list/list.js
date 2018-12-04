@@ -219,9 +219,10 @@ Page({
         url: app.globalData.url + '/dict/v1/getDictByKey/article_type_',
         method: "GET",
         success: res => {
-          that.setData({
+          that.setData({ 
             types: res.data.data.value,
-            index: res.data.data.key
+            index: res.data.data.key,
+            articleType: res.data.data.key[0]
           });
           resolve();
         }

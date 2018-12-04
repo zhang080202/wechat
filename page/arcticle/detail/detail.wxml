@@ -24,7 +24,7 @@
   </view>
   <view class='page-foot'>
     <i-row i-class="col-class">
-      <navigator url='../message/message?title={{detail.title}}&articleId={{detail.articleId}}'>
+      <navigator open-type='redirect' url='../message/message?title={{detail.title}}&articleId={{detail.articleId}}'>
         <i-col span="4" offset="20" i-class="">
           写留言
         </i-col>

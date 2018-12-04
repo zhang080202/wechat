@@ -1,6 +1,7 @@
 <view class='container'>
+<scroll-view class='page-body' scroll-y='true' enable-back-to-top='true' scroll-with-animation='true'>
   <view class='page-head'>
-    <swiper indicator-dots='{{indicatorDots}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}' indicator-active-color='{{indicatorColor}}'>
+    <swiper class='page-head-swiper' indicator-dots='{{indicatorDots}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}' indicator-active-color='{{indicatorColor}}'>
       <block wx:for='{{imgUrls}}' wx:key='*this'>
         <swiper-item>
           <image class='page-head-image' src='{{item}}' mode='widthFix'></image>
@@ -9,7 +10,7 @@
     </swiper>
   </view>
   
-  <scroll-view class='page-body' scroll-y='true' enable-back-to-top='true' scroll-with-animation='true'>
+  
     <block wx:for='{{list}}'>
       <view class='page-body-item'>
         <navigator class='page-body-item-navigator' url='detail/detail?articleId={{item.articleId}}'>
@@ -18,11 +19,8 @@
               <label class='page-body-item-cnetent-label'>{{item.title}}</label>
             </view>
             <view class='page-body-item-image'>
-              <image class='page-body-image' src='{{item.accessImage}}' mode='cnetent'></image>
+              <image class='page-body-image' src='{{item.accessImage}}' mode='scaleToFill'></image>
             </view>
-            <!-- <block wx:if='{{item.accessImage == null}}'>
-              <image class='page-body-image' src='../../image/default.jpg' mode='cover'></image>
-            </block> -->
           </view>             
         </navigator>
       </view>

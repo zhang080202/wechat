@@ -101,29 +101,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-
-    /**
-     * 获取系统信息
-     */
-    wx.getSystemInfo({
-
-      success: function (res) {
-        that.setData({
-          winWidth: res.windowWidth,
-          winHeight: res.windowHeight
-        });
-      }
-
-    });
-
-    if (that.data.currentTab == 0) {
-      //私密文章
-      this.getArticlerList(1);
-    } else if (that.data.currentTab == 1) {
-      //公开文章
-      this.getArticlerList(0);
-    }
+    
   },
 
   /**
@@ -436,7 +414,7 @@ Page({
             visible: false,
             visible2: false
           });
-          that.onLoad();
+          that.onShow();
         }
         if (res.data.code == 500) {
           $Message({
@@ -530,7 +508,7 @@ Page({
             visible: false,
             visible1: false
           });
-          that.onLoad();
+          that.onShow();
         }
         if (res.data.code == 500) {
           $Message({
@@ -573,7 +551,7 @@ Page({
             visible_2: false,
             visible3: false
           });
-          that.onLoad();
+          that.onShow();
         }
         if (res.data.code == 500) {
           // wx.showToast({
@@ -636,7 +614,7 @@ Page({
             visible_4: false,
             visible5: false
           });
-          that.onLoad();
+          that.onShow();
         }
         if (res.data.code == 500) {
           // wx.showToast({
@@ -770,7 +748,7 @@ Page({
     this.setData({
       articleType: e.currentTarget.dataset.dictid
     })
-    this.onLoad();
+    this.onShow();
     this.hidenNeck();
   },
 
@@ -781,7 +759,7 @@ Page({
     this.setData({
       articleStatus: e.currentTarget.dataset.status
     })
-    this.onLoad();
+    this.onShow();
     this.hidenNeck();
   },
 
@@ -792,7 +770,7 @@ Page({
     this.setData({
       isDesc: e.currentTarget.dataset.isdesc
     });
-    this.onLoad();
+    this.onShow();
     this.hidenNeck();
   },
 
@@ -807,7 +785,29 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    var that = this;
+    that.handleClose();
+    /**
+     * 获取系统信息
+     */
+    wx.getSystemInfo({
+
+      success: function (res) {
+        that.setData({
+          winWidth: res.windowWidth,
+          winHeight: res.windowHeight
+        });
+      }
+
+    });
+
+    if (that.data.currentTab == 0) {
+      //私密文章
+      this.getArticlerList(1);
+    } else if (that.data.currentTab == 1) {
+      //公开文章
+      this.getArticlerList(0);
+    }
   },
 
   /**
@@ -828,7 +828,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.onLoad();
+    this.onShow();
     // 停止下拉动作
     wx.stopPullDownRefresh();
   },
