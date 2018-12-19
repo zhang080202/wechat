@@ -12,7 +12,7 @@
 
     <block wx:for='{{list}}'>
       <view class='page-body-item'>
-        <navigator class='page-body-item-navigator' url='detail/detail?articleId={{item.articleId}}&isOpen=1'>
+        <navigator class='page-body-item-navigator' url='detail/detail?articleId={{item.articleId}}'>
           <view class='page-body-item-navigator-view'>
             <view class='page-body-item-cnetent'>
               <label class='page-body-item-cnetent-label'>{{item.title}}</label>
@@ -26,3 +26,4 @@
     </block>
   </view>
 </view>
+<i-message id="message" />
