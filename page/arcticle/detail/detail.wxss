@@ -1,4 +1,4 @@
-/* @import "../../../wxParse/wxParse.wxss"; */
+@import "../../../wxParse/wxParse.wxss";
 .container {
   height: 100%;
 }
