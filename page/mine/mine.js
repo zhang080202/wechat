@@ -20,6 +20,7 @@ Page({
     cid: 0, // 文章ID
     status: 0, // 文章状态
     isPrivate: false,
+    isEdit: false,
     visible5: false, 
     visible4: false, //
     visible3: false, //撤销审核
@@ -257,7 +258,8 @@ Page({
     this.setData({
       cid: e.currentTarget.dataset.id,
       status: e.currentTarget.dataset.status,
-      isPrivate: e.currentTarget.dataset.isprivate
+      isPrivate: e.currentTarget.dataset.isprivate,
+      isEdit: e.currentTarget.dataset.isedit
     })
     console.log("click item event ", e.currentTarget.dataset);
     // new Promise(function (resolve, reject) {
@@ -326,6 +328,13 @@ Page({
     }
     //编辑
     if (op == 1) {
+      if(this.data.isEdit == "0") {
+        $Message({
+          content: '该文章需要至后台管理系统中进行编辑',
+          type: 'warning'
+        });
+        return;
+      };
       wx.navigateTo({
         url: 'list/list?articleId=' + this.data.cid,
       })

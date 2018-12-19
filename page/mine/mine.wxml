@@ -69,7 +69,7 @@
     </view>
     <view class='page-body' bindtap="hidenNeck">
       <block wx:for='{{list}}'>
-        <view class='page-body-item' bindtap="clickItem" data-id='{{item.articleId}}' data-status="{{item.status}}" data-isPrivate='{{item.isPrivate}}'>
+        <view class='page-body-item' bindtap="clickItem" data-id='{{item.articleId}}' data-isEdit='{{item.isEdit}}' data-status="{{item.status}}" data-isPrivate='{{item.isPrivate}}'>
           <!-- <navigator class='page-body-item-navigator' url='../arcticle/detail/detail?articleId={{item.articleId}}'> -->
           <i-row class="page-body-irow">
             <i-col span="16" offset="1" class="page-body-item-cnetent-label">{{item.title}}</i-col>
@@ -159,7 +159,7 @@
     </view>
     <view class='page-body' bindtap="hidenNeck">
       <block wx:for='{{list}}'>
-        <view class='page-body-item' bindtap="clickItem" data-id='{{item.articleId}}' data-status="{{item.status}}" data-isPrivate='{{item.isPrivate}}'>
+        <view class='page-body-item' bindtap="clickItem" data-id='{{item.articleId}}' data-status="{{item.status}}" data-isPrivate='{{item.isPrivate}}' data-isEdit='{{item.isEdit}}'>
           <!-- <navigator class='page-body-item-navigator' url='../arcticle/detail/detail?articleId={{item.articleId}}'> -->
           <i-row class="page-body-irow">
             <i-col span="16" offset="1" class="page-body-item-cnetent-label">{{item.title}}</i-col>
