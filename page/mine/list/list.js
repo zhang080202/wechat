@@ -241,26 +241,33 @@ Page({
     if (options.articleId) {
       //根据文章ID 获取文章详细信息
       wx.request({
-        url: app.globalData.url + '/article/v1/getArticlerById/' + options.articleId + '/' + app.globalData.user.userId,
+        url: app.globalData.url + '/article/v1/getArticlerById/' + options.articleId + '/' + app.globalData.user.userId + '/0',
         method: 'GET',
         success: res => {
-          console.log(res);
-          that.setData({
-            title: res.data.data.detail.title,
-            indexs: that.data.index.indexOf(res.data.data.detail.articleType.toString()),
-            html: res.data.data.detail.content,
-            files: [res.data.data.detail.accessImage],
-            imageId: res.data.data.detail.image,
-            articleId: res.data.data.detail.articleId,
-            articleType: res.data.data.detail.articleType
-          })
+          if (res.data.code == 200) {
+            that.setData({
+              title: res.data.data.detail.title,
+              indexs: that.data.index.indexOf(res.data.data.detail.articleType.toString()),
+              html: res.data.data.detail.content,
+              files: [res.data.data.detail.accessImage],
+              imageId: res.data.data.detail.image,
+              articleId: res.data.data.detail.articleId,
+              articleType: res.data.data.detail.articleType
+            })
+          }
+          if (res.data.code == 500) {
+            $Message({
+              content: res.data.msg,
+              type: 'error'
+            });
+          }
           wx.hideLoading();
         },
         fail: res => {
-          wx.showToast({
-            title: '网络异常，请稍后再试',
-            icon: 'none'
-          })
+          $Message({
+            content: '网络异常，请稍后再试',
+            type: 'error'
+          });
         }
       })
     } else {
