@@ -42,7 +42,7 @@ Page({
     })
     //根据文章ID 获取文章详细信息
     wx.request({
-      url: app.globalData.url + '/article/v1/getArticlerById/' + options.articleId + '/' + app.globalData.user.userId,
+      url: app.globalData.url + '/article/v1/getArticlerById/' + options.articleId + '/' + app.globalData.user.userId + '/' + options.isOpen,
       method: 'GET',
       success: res => {
         if(res.data.code == 200) {
