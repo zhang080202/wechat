@@ -331,7 +331,7 @@ Page({
     // 预览
     if (op == 0) {
       wx.navigateTo({
-        url: '../arcticle/detail/detail?articleId=' + this.data.cid + '/isOpen=0',
+        url: '../arcticle/detail/detail?articleId=' + this.data.cid + '&isOpen=0',
       })
     }
     //编辑
