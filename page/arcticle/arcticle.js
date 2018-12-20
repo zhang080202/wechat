@@ -20,7 +20,9 @@ Page({
     pageSize: 10,
     noMoretip: false, //当前页是否为最后一页
     pages: 0, //总页数
-    total: 0 //总记录数
+    total: 0, //总记录数
+    inputShowed: false,
+    inputVal: ""
   },
 
   /**

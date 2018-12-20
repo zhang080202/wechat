@@ -40,6 +40,10 @@ Page({
     articleStatus: -1, //文章状态
     isDesc: false, //时间排序
     types: [],
+    page: 1,
+    pageSize: 1000,
+    noMoretip: false, //当前页是否为最后一页
+    total: 0,
     actions: [
       {
         name: '预览'
@@ -121,8 +125,8 @@ Page({
       url: app.globalData.url + '/article/v1/getArticlerListByUser',
       method: 'GET',
       data: {
-        "page": 1,
-        "pageSize": 10,
+        "page": that.data.page,
+        "pageSize": that.data.pageSize,
         "isPrivate": e,
         "userId": app.globalData.user.userId,
         "type": that.data.articleType,
@@ -133,13 +137,30 @@ Page({
         console.log("我的文章列表返回数据 ----> ", res);
         //计算 高度
         const len = res.data.data.records.length;
+        var article_list = that.data.list;
         that.setData({
           winHeight: len * 150 + 100
         })
+        // debugger;
         if (res.data.code == 200) {
+          article_list = res.data.data.records;
+          //暂时不做分页
+          // if (that.data.page == 1) {
+          //   //第一次加载页面
+          //   article_list = res.data.data.records;
+          // } else {
+          //   article_list = article_list.concat(res.data.data.records);
+          // }
           that.setData({
-            list: res.data.data.records
+            list: article_list,
+            total: res.data.data.total
           })
+          // if (lastPageLength < 10) {
+          //   //当前页为最后一页
+          //   that.setData({
+          //     noMoretip: true
+          //   })
+          // }
         }
         if (res.data.code == 500) {
           $Message({
@@ -147,13 +168,14 @@ Page({
             type: 'error'
           });
         }
-        
+        wx.hideLoading();
       },
       fail: res => {
         $Message({
           content: "网络异常，请稍后再试",
           type: 'error'
         });
+        wx.hideLoading();
       }
     })
 
@@ -808,14 +830,12 @@ Page({
      * 获取系统信息
      */
     wx.getSystemInfo({
-
       success: function (res) {
         that.setData({
           winWidth: res.windowWidth,
           winHeight: res.windowHeight
         });
       }
-
     });
 
     if (that.data.currentTab == 0) {
@@ -845,6 +865,11 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    // that.setData({
+    //   page: 1,
+    //   noMoretip: false,    //无更多
+    //   list: [], //商品列表
+    // })
     this.onShow();
     // 停止下拉动作
     wx.stopPullDownRefresh();
@@ -854,7 +879,16 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    // console.log("---onReachBottom")
+    // var page = this.data.page;  //获取现在页码
+    // var pageSize = this.data.pageSize;  //获取现在页码
+    // if (!this.data.noMoretip) {
+    //   page++
+    //   this.setData({			//页码加一，调用函数，获取下一页内容
+    //     page: page
+    //   })
+    //   this.onShow();
+    // }
   },
 
   /**
