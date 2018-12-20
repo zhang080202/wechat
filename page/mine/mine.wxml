@@ -3,7 +3,9 @@
   <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">公开文章({{openNum}})</view>
 </view>
 
-<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
+<!-- style='height: {{winHeight - 31}}rpx' -->
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style='height: {{winHeight}}rpx'  bindchange="bindChange">
+  <!-- 私密文章 -->
   <swiper-item>
     <view class="page-neck">
       <!-- <i-row i-class="col-class">
@@ -113,7 +115,8 @@
       </block>
     </view>
   </swiper-item>
-  <swiper-item>
+  <!-- 公开文章 -->
+  <swiper-item >
     <view class="page-neck">
       <i-row i-class="col-class">
         <i-col span="7" offset="1" bindtap="showType" i-class="{{showtype ? 'showColor' : ''}}">
@@ -159,6 +162,7 @@
     </view>
     <view class='page-body' bindtap="hidenNeck">
       <block wx:for='{{list}}'>
+        <!-- <scroll-view class='container' scroll-y  > -->
         <view class='page-body-item' bindtap="clickItem" data-id='{{item.articleId}}' data-status="{{item.status}}" data-isPrivate='{{item.isPrivate}}' data-isEdit='{{item.isEdit}}'>
           <!-- <navigator class='page-body-item-navigator' url='../arcticle/detail/detail?articleId={{item.articleId}}'> -->
           <i-row class="page-body-irow">
@@ -172,13 +176,14 @@
             </i-col>
           </i-row>
         </view>
+        <!-- </scroll-view> -->
       </block>
     </view>
   </swiper-item>
 </swiper>
 
+
 <!-- Modal操作框 -->
-<!-- <i-modal title="您想对该文章干嘛" show-cancel="true" visible="{{ visible }}" actions="{{ actions }}" action-mode="{{ vertical }}" bind:click="handleClick" /> -->
 <i-action-sheet visible="{{ visible }}" actions="{{ actions }}" show-cancel bind:cancel="handleClose" bind:click="handleClick" data-flag="sheet1" />
 <i-action-sheet visible="{{ visible_2 }}" actions="{{ actions2 }}" show-cancel bind:cancel="handleClose" bind:click="handleClick" data-flag="sheet2" />
 <i-action-sheet visible="{{ visible_3 }}" actions="{{ actions3 }}" show-cancel bind:cancel="handleClose" bind:click="handleClick" data-flag="sheet3" />

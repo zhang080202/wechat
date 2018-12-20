@@ -110,6 +110,9 @@ Page({
    */
   getArticlerList: function (e) {
     var that = this;
+    this.setData({
+      list: []
+    })
     wx.showLoading({
       title: '加载中',
     })
@@ -128,6 +131,11 @@ Page({
       },
       success: res => {
         console.log("我的文章列表返回数据 ----> ", res);
+        //计算 高度
+        const len = res.data.data.records.length;
+        that.setData({
+          winHeight: len * 150 + 100
+        })
         if (res.data.code == 200) {
           that.setData({
             list: res.data.data.records

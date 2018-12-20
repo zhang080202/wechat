@@ -1,5 +1,10 @@
 /* page/mine/mine.wxss */
-
+/* page {
+  height: 100%;
+} */
+/* .container {
+  height: 100%;
+} */
 .swiper-tab {
   width: 100%;
   border-bottom: 2rpx solid #777;
@@ -22,15 +27,17 @@
 }
 
 .swiper-box {
-  display: block;
-  height: 100%;
+  /* display: block; */
+  /* height: 100%; */
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
+  /* border: 1px solid red; */
 }
 
-.page-body {
-  height: 100%;
-}
+/* .page-body {
+  height: 20000rpx;
+  border: 1px solid red;
+} */
 
 .page-body-item {
   height: 150rpx;

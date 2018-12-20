@@ -17,7 +17,8 @@ Page({
     title: '',
     list: [],
     page: 1,
-    pageSize: 2,
+    pageSize: 10,
+    noMoretip: false, //当前页是否为最后一页
     pages: 0, //总页数
     total: 0 //总记录数
   },
@@ -60,69 +61,84 @@ Page({
 
   getArticlerList (page, pageSize) {
     var that = this;
+    wx.showLoading({
+      title: '加载中',
+    });
     wx.request({
       url: app.globalData.url + '/article/v1/getArticlerList/' + page + '/' + pageSize,
       method: 'GET',
       success: res => {
         if (res.data.code == 200) {
           var article_list = that.data.list;
+          var lastPageLength = res.data.data.records.length;
           // debugger;
           if (that.data.total == 0) {
             //第一次加载页面
-            that.setData({
-              list: res.data.data.records,
-              total: res.data.data.total,
-              pages: res.data.data.pages
-            })
-            //判断 当前页小于 总页数， 且总页数没有增加的情况 直接push
-          } else if (page < res.data.data.pages && that.data.pages == res.data.data.pages) {
-            for (let i = 0; i < res.data.data.records.length; i++){
-              article_list.push(res.data.data.records[i]);
-            }
-            that.setData({
-              list: article_list
-            })
-            //判断 当前页等于总页数（也就是最后一页） 且总页数没有增加的情况
-          } else if (page == res.data.data.pages && that.data.pages == res.data.data.pages) {
-            // 总条数 没有增加， 也没有加载最后一页时，直接push
-            if (that.data.total == res.data.data.total && that.data.list.length < res.data.data.total) {
-              for (let i = 0; i < res.data.data.records.length; i++) {
-                article_list.push(res.data.data.records[i]);
-              }
-              that.setData({
-                list: article_list
-              })
-              // 总条数 增加了 但没有超过当前页size
-            } else if (that.data.total < res.data.data.total) {
-              //已经全部加载完成的情况下 要添加新增的N条记录
-              if (that.data.list.length == that.data.total) {
-                const num = pageSize * (page - 1);
-                for (let i = num + 1; i < that.data.list.length && i > num; i++) {
-                  article_list.remove(i);
-                }
-                for (let i = 0; i < res.data.data.records.length; i++) {
-                  article_list.push(res.data.data.records[i]);
-                }
-                that.setData({
-                  list: article_list
-                })
-              } else {
-                // 总条数增加，但未加载最后一页 直接push
-                for (let i = 0; i < res.data.data.records.length; i++) {
-                  article_list.push(res.data.data.records[i]);
-                }
-                that.setData({
-                  list: article_list
-                })
-              }
-            } else {
-              //全部加载完毕
-              wx.showToast({
-                title: '暂无更多数据',
-                icon: 'none'
-              })
-            }
+            article_list = res.data.data.records; 
+          } else {
+            article_list = article_list.concat(res.data.data.records);
           }
+          that.setData({
+            list: article_list,
+            total: res.data.data.total,
+            pages: res.data.data.pages
+          })
+          if (lastPageLength < 10) {
+            //当前页为最后一页
+            that.setData({
+              noMoretip: true
+            })
+          }
+          //判断 当前页小于 总页数， 且总页数没有增加的情况 直接push
+          // else if (page < res.data.data.pages && that.data.pages == res.data.data.pages) {
+          //   // for (let i = 0; i < res.data.data.records.length; i++){
+          //   //   article_list.push(res.data.data.records[i]);
+          //   // }
+          //   article_list = article_list.concat(res.data.data.records);
+          //   that.setData({
+          //     list: article_list
+          //   })
+          //   //判断 当前页等于总页数（也就是最后一页） 且总页数没有增加的情况
+          // } else if (page == res.data.data.pages && that.data.pages == res.data.data.pages) {
+          //   // 总条数 没有增加， 也没有加载最后一页时，直接push
+          //   if (that.data.total == res.data.data.total && that.data.list.length < res.data.data.total) {
+          //     for (let i = 0; i < res.data.data.records.length; i++) {
+          //       article_list.push(res.data.data.records[i]);
+          //     }
+          //     that.setData({
+          //       list: article_list
+          //     })
+          //     // 总条数 增加了 但没有超过当前页size
+          //   } else if (that.data.total < res.data.data.total) {
+          //     //已经全部加载完成的情况下 要添加新增的N条记录
+          //     if (that.data.list.length == that.data.total) {
+          //       const num = pageSize * (page - 1);
+          //       for (let i = num + 1; i < that.data.list.length && i > num; i++) {
+          //         article_list.remove(i);
+          //       }
+          //       for (let i = 0; i < res.data.data.records.length; i++) {
+          //         article_list.push(res.data.data.records[i]);
+          //       }
+          //       that.setData({
+          //         list: article_list
+          //       })
+          //     } else {
+          //       // 总条数增加，但未加载最后一页 直接push
+          //       for (let i = 0; i < res.data.data.records.length; i++) {
+          //         article_list.push(res.data.data.records[i]);
+          //       }
+          //       that.setData({
+          //         list: article_list
+          //       })
+          //     }
+          //   } else {
+          //     //全部加载完毕
+          //     wx.showToast({
+          //       title: '暂无更多数据',
+          //       icon: 'none'
+          //     })
+          //   }
+          // }
         }
         if (res.data.code == 500) {
           $Message({
@@ -179,18 +195,25 @@ Page({
     // this.onLoad();
     // 停止下拉动作
     // wx.stopPullDownRefresh();
-    var that = this;
-    wx.showLoading({
-      title: '加载中',
-    });
-    if (this.data.page == this.data.pages) {
-      this.getArticlerList(this.data.page, this.data.pageSize);
-    } else {
-      this.getArticlerList(this.data.page + 1, this.data.pageSize);
-      this.setData({
-        page: that.data.page + 1
-      })
-    }
+    // var that = this;
+    // wx.showLoading({
+    //   title: '加载中',
+    // });
+    // if (this.data.page == this.data.pages) {
+    //   this.getArticlerList(this.data.page, this.data.pageSize);
+    // } else {
+    //   this.getArticlerList(this.data.page + 1, this.data.pageSize);
+    //   this.setData({
+    //     page: that.data.page + 1
+    //   })
+    // }
+    this.setData({
+      page: 1,
+      noMoretip: false,    //无更多
+      list: [], //商品列表
+    })
+    this.getArticlerList(this.data.page, this.data.pageSize);
+    wx.stopPullDownRefresh();
   },
 
   /**
@@ -205,6 +228,16 @@ Page({
     // } else {
     //   this.getArticlerList(this.data.page + 1, this.data.pageSize);
     // }
+    console.log("---onReachBottom")
+    var page = this.data.page;  //获取现在页码
+    var pageSize = this.data.pageSize;  //获取现在页码
+    if (!this.data.noMoretip) {
+      page++
+      this.setData({			//页码加一，调用函数，获取下一页内容
+        page: page
+      })
+      this.getArticlerList(page, pageSize);
+    }
 
   },
 
