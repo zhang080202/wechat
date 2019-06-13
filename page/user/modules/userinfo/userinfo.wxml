@@ -43,3 +43,5 @@
     </form>
   </view>
 </view>
+
+<i-message id="message" />

@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "基本信息",
-  "i-message": "../../dist/message/index"
+  "usingComponents": {
+    "i-message": "../../../../dist/message/index"
+  }
 }

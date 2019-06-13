@@ -1,4 +1,5 @@
 const app = getApp();
+const { $Message } = require('../../../../dist/base/index');
 
 Page({
 
@@ -70,6 +71,7 @@ Page({
                 content: '保存成功',
                 type: 'success'
               });
+              
               setTimeout(function () {
                 wx.hideToast();
               }, 1000);
