@@ -76,9 +76,11 @@ Page({
                 wx.hideToast();
               }, 1000);
               //返回上一级页面
-              wx.navigateBack({
-                delta: 1
-              })
+              setTimeout(function () {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }, 1000)
             }
           },
           fail: res => {

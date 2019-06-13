@@ -21,9 +21,9 @@ Page({
         page: ''
       },
       {
-        id: '',
+        id: 'feedback',
         name: '意见反馈',
-        page: ''
+        page: 'feedback'
       }
     ]
   },

@@ -5,6 +5,7 @@
     "page/arcticle/message/message",
     "page/user/user",
     "page/user/modules/userinfo/userinfo",
+    "page/user/modules/feedback/feedback",
     "page/mine/mine",
     "page/mine/list/list"
   ],

@@ -1,0 +1,15 @@
+<view class="container">
+  <!-- <i-panel title="意见主题">
+    <view style="padding: 10px;">{{title}}</view>
+  </i-panel> -->
+
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <textarea bindinput='blurHandle' class="weui-textarea" auto-focus='true' maxlength="50" placeholder="请输入您的意见" style="height: 5.7em" />
+      </view>
+    </view>
+  </view>
+  <i-button type="primary" bind:click="handleClick">保存</i-button>
+  <i-message id="message" />
+</view>

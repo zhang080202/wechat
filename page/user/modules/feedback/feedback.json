@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "意见反馈",
+  "usingComponents": {
+    "i-button": "../../../../dist/button/index",
+    "i-message": "../../../../dist/message/index"
+  }
+}
