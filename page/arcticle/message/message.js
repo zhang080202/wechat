@@ -62,7 +62,7 @@ Page({
           //   delta: 1
           // })
           wx.redirectTo({
-            url: '../detail/detail?articleId=' + that.data.articleId
+            url: '../detail/detail?articleId=' + that.data.articleId + '&isOpen=0'
           })
         } else {
           that.handleClose();
