@@ -47,7 +47,8 @@ App({
     userInfo: null,
     user: {},
     openid: null,
-    url: 'https://www.feigly.top/article'
+    url: 'https://192.168.2.111/article'
+    // url: 'https://www.feigly.top/article'
     // url: 'http://192.168.0.19/article'
     // url: 'http://192.168.31.233/article'
   }
