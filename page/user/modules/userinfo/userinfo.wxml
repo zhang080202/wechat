@@ -4,14 +4,14 @@
       <view class='page-body-name'>
         <view class='page-body-name-info'>姓名:</view>
         <view class='page-body-name-view'>
-          <input name='name' class='page-body-name-view-input' value='{{user.name}}' type='text' maxlength='10' placeholder='请输入姓名'></input>
+          <input name='name' class='page-body-name-view-input' bindblur='nameBlur' value='{{user.name}}' type='text' maxlength='10' placeholder='请输入姓名'></input>
         </view>
       </view>
 
       <view class='page-body-gender page-body-name'>
         <view class='page-body-gender-info page-body-name-info'>性别:</view>
         <view class='page-body-name-view'>
-          <radio-group name='gender'>
+          <radio-group name='gender' bindchange='genderChange'>
             <label>
               <radio value='1' checked="{{user.gender == '1' ? true : false}}" />男</label>
             <label>
@@ -23,7 +23,7 @@
       <view class='page-body-phone page-body-name'>
         <view class='page-body-name-info'>电话:</view>
         <view class='page-body-name-view'>
-          <input name='phone' class='page-body-name-view-input' value='{{user.phone}}' type='number' placeholder='请输入联系电话'></input>
+          <input name='phone' class='page-body-name-view-input' bindblur='phoneBlur' maxlength='11' value='{{user.phone}}' type='number' placeholder='请输入联系电话'></input>
         </view>
       </view>
 
@@ -37,7 +37,8 @@
       </view>
 
       <view class='page-foot-view'>
-        <button class='page-foot-view-button' type='primary' form-type='submit'>保存</button>
+        <!-- <button class='page-foot-view-button' type='primary' form-type='submit'>保存</button> -->
+        <i-button type="primary" bind:click="formSubmit">保存</i-button>
       </view>
 
     </form>

@@ -16,11 +16,6 @@ Page({
         page: 'userinfo'
       },
       {
-        id: '',
-        name: '我的审核',
-        page: ''
-      },
-      {
         id: 'feedback',
         name: '意见反馈',
         page: 'feedback'
@@ -36,7 +31,18 @@ Page({
       userInfo: app.globalData.userInfo,
       hasLogin: app.globalData.hasLogin
     })
-    console.log(this.data.userInfo)
+
+    if (app.globalData.user.userId == 'owFiu4r96g4Dqn_112ok4iT0pm18') {
+      const check =  {
+        id: 'check',
+        name: '我的审核',
+        page: 'check'
+      }
+      this.data.list.push(check);
+      this.setData({
+        list: this.data.list
+      })
+    }
   },
 
   /**

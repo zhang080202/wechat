@@ -26,7 +26,7 @@ Page({
    */
   formSubmit: function(e) {
     var that = this;
-    if (e.detail.value.phone.length == 0) {
+    if (that.data.user.phone.length == 0) {
       wx.showToast({
         title: '联系电话不能为空',
         icon: 'none',
@@ -39,10 +39,10 @@ Page({
     }
     //组装数据
     that.setData({
-      'user.name' : e.detail.value.name,
-      'user.gender' : e.detail.value.gender,
-      'user.phone' : e.detail.value.phone,
-      'user.birthday' : e.detail.value.birthday
+      'user.name': that.data.name,
+      'user.gender': that.data.gender,
+      'user.phone' : that.data.phone,
+      'user.birthday': that.data.birthday
     })
     console.log(that.data.user);
     wx.showToast({
@@ -91,6 +91,24 @@ Page({
           }
         })
       }
+    })
+  },
+
+  phoneBlur: function(e) {
+    this.setData({
+      'user.phone': e.detail.value
+    })
+  },
+
+  genderChange: function (e) {
+    this.setData({
+      'user.gender': e.detail.value
+    })
+  }, 
+
+  nameBlur: function(e) {
+    this.setData({
+      'user.name': e.detail.value
     })
   },
 
